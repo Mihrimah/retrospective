@@ -4,4 +4,6 @@ class FakeDataModel{
   String title;
   String text;
   int likeCount;
+
+  FakeDataModel(this.code, this.templateType, this.title, this.text, this.likeCount);
 }

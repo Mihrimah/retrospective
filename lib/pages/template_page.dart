@@ -19,7 +19,7 @@ class TemplatePage extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, "/grouped_list");
+                Navigator.pushNamed(context, "/retro");
               },
               child: Container(
                 color: Theme.of(context).primaryColorDark,
