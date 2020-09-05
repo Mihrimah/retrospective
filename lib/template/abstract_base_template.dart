@@ -11,6 +11,10 @@ abstract class AbstractBaseTemplate {
     return this.name;
   }
 
+  int getTemplateTypeId() {
+    return this.type;
+  }
+
   List<String> getTitles() {
     return this.titles;
   }
