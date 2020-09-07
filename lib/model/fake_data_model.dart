@@ -1,9 +1,9 @@
 class FakeDataModel{
-  String code;
-  String templateType;
-  String title;
-  String text;
+  String roomCode;
+  int templateType;
+  String templateTitle;
+  String textContent;
   int likeCount;
 
-  FakeDataModel(this.code, this.templateType, this.title, this.text, this.likeCount);
+  FakeDataModel(this.roomCode, this.templateType, this.templateTitle, this.textContent, this.likeCount);
 }

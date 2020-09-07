@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:retrospektif/pages/add_new_content_page.dart';
 import 'package:retrospektif/pages/join_page.dart';
 import 'package:retrospektif/pages/retro_page.dart';
 import 'package:retrospektif/pages/start_page.dart';
@@ -9,7 +10,8 @@ class App extends StatelessWidget {
     '/start': (context) => StartPage(),
     '/choose_template': (context) => TemplatePage(),
     '/join_room': (context) => JoinPage(),
-    '/retro' : (context) => RetroPage(ModalRoute.of(context).settings.arguments)
+    '/retro' : (context) => RetroPage(ModalRoute.of(context).settings.arguments),
+    //'/add_new_content': (context) => AddNewContentPage(ModalRoute.of(context).settings.arguments)
   };
 
   final darkTheme = ThemeData(

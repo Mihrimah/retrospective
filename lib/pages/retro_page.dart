@@ -5,11 +5,14 @@ import 'package:retrospektif/core/code_generator.dart';
 import 'package:retrospektif/core/grouped_list_view.dart';
 import 'package:retrospektif/model/fake_data_model.dart';
 import 'package:retrospektif/model/retro_page_params.dart';
+import 'package:retrospektif/pages/waiting_content_page.dart';
 import 'package:retrospektif/repository/fake_repository.dart';
-import 'package:retrospektif/template/abstract_base_template.dart';
+
+import 'add_new_content_page.dart';
 
 class RetroPage extends StatelessWidget {
   RetroPageParams retroPageParams;
+  final FakeRepository _fakeRepository = FakeRepository();
   final CodeGenerator _codeGenerator = CodeGenerator();
   final snackBar = SnackBar(
     content: Text('Copied!'),
@@ -26,16 +29,36 @@ class RetroPage extends StatelessWidget {
           child: Builder(
             builder: (context) => AppBar(
               title: appBarTitle(retroPageParams.roomCode, context),
+              actions: [
+                FlatButton(
+                  child: Icon(Icons.add),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AddNewContentPage(retroPageParams,_fakeRepository)),
+                    );
+                    Navigator.pushNamed(context, "/add_new_content",arguments: retroPageParams);
+                  },
+                )
+              ],
             ),
           ),
         ),
-        body: GroupedListView(
-          groupBy: (FakeDataModel t) => t.title,
-          groupBuilder: (BuildContext context, String title) =>
-              _headerWidget(title),
-          listBuilder: (BuildContext context, FakeDataModel t) =>
-              _listWidget(t.text),
-          list: FakeRepository().generateData(),
+        body: StreamBuilder(
+          stream: _fakeRepository.getRoomData(retroPageParams.roomCode,
+              retroPageParams.template.getTemplateTypeId()),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) return buildWaitingScreen();
+            if (snapshot.data.length == 0) return WaitingContentPage();
+            return GroupedListView(
+              groupBy: (FakeDataModel t) => t.templateTitle,
+              groupBuilder: (BuildContext context, String title) =>
+                  _headerWidget(title),
+              listBuilder: (BuildContext context, FakeDataModel t) =>
+                  _listWidget(t),
+              list: snapshot.data,
+            );
+          },
         ));
   }
 
@@ -56,19 +79,31 @@ class RetroPage extends StatelessWidget {
     );
   }
 
-  Widget _listWidget(String text) {
-    return Container(
-      padding: EdgeInsets.all(10),
-      margin: EdgeInsets.all(2),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            text,
-            style: TextStyle(fontSize: 16),
-          )
-        ],
+  Widget _listWidget(FakeDataModel fakeDataModel) {
+    return ListTile(
+      title: Text(
+        fakeDataModel.textContent,
+        style: TextStyle(fontSize: 16),
       ),
+      trailing: _favouriteCountAndIcon(fakeDataModel.likeCount),
+    );
+  }
+
+  Widget _favouriteCountAndIcon(int likeCount) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          likeCount.toString(),
+          style: TextStyle(fontSize: 15),
+        ),
+        IconButton(
+          icon: Icon(Icons.favorite),
+          onPressed: () {
+            print("kalp!");
+          },
+        )
+      ],
     );
   }
 
@@ -84,6 +119,15 @@ class RetroPage extends StatelessWidget {
           },
         )
       ],
+    );
+  }
+
+  Widget buildWaitingScreen() {
+    return Scaffold(
+      body: Container(
+        alignment: Alignment.center,
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 }
