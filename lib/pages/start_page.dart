@@ -1,33 +1,118 @@
 import 'package:flutter/material.dart';
+import 'package:retrospektif/model/retro_page_params.dart';
 
-class StartPage extends StatelessWidget {
+class StartPage extends StatefulWidget {
+  @override
+  _StartPageState createState() => _StartPageState();
+}
+
+class _StartPageState extends State<StartPage> {
+  String code;
+  TextEditingController _textEditingController = TextEditingController();
+  bool isEnabled = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [createButton(context), joinButton(context)]),
+        child: Container(
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: double.infinity,
+                  margin: EdgeInsets.only(right: 50, left: 50),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 60,
+                        width: double.infinity,
+                        child: RaisedButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/choose_template");
+                          },
+                          child: Text("Create Room",
+                              style: Theme.of(context).textTheme.bodyText1),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 50,
+                        width: double.infinity,
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: TextFormField(
+                          decoration: const InputDecoration(
+                            hintText: 'Room code',
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
+                          ),
+                          controller: _textEditingController,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                        width: double.infinity,
+                      ),
+                      SizedBox(
+                        height: 60,
+                        width: double.infinity,
+                        child: RaisedButton(
+                          onPressed: isEnabled ? (){
+                            Navigator.pushNamed(context, "/retro", arguments: RetroPageParams(null, _textEditingController.text));
+                          } : null,
+                          child: Text("Join Room"),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ]),
+        ),
       ),
     );
   }
 
-  RaisedButton joinButton(BuildContext context) {
-    return RaisedButton(
-      onPressed: () {Navigator.pushNamed(context, "/join_room");},
-      child: Text("Join Room"),
-    );
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is removed from the
+    // widget tree.
+    _textEditingController.dispose();
+    super.dispose();
   }
 
-  RaisedButton createButton(BuildContext context) {
-    return RaisedButton(
-      onPressed: () {
-        Navigator.pushNamed(context, "/choose_template");
-      },
-      child: Text("Create Room", style: Theme
-          .of(context)
-          .textTheme
-          .bodyText1),
-    );
+  @override
+  void initState() {
+    super.initState();
+
+    _textEditingController.addListener(_checkButtonEnable);
   }
+
+  _checkButtonEnable() {
+    if (_textEditingController == null ||
+        _textEditingController.text == '' ||
+        _textEditingController.text == null) {
+      setState(() {
+        isEnabled = false;
+      });
+    } else {
+      setState(() {
+        isEnabled = true;
+      });
+    }
+  }
+/*RaisedButton joinButton(BuildContext context, String value) {
+    var onPress;
+    if (value == null)
+      onPress = null;
+    else
+      onPress = () {
+        print("value " + value);
+        Navigator.pushNamed(context, "/join_room");
+      };*/
 }

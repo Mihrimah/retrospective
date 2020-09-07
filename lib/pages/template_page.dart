@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:retrospektif/core/code_generator.dart';
+import 'package:retrospektif/model/retro_page_params.dart';
 import 'package:retrospektif/template/abstract_base_template.dart';
 import 'package:retrospektif/template/mad_glad_sad.dart';
 import 'package:retrospektif/template/starfish.dart';
@@ -7,6 +8,7 @@ import 'package:retrospektif/template/starfish.dart';
 class TemplatePage extends StatelessWidget {
   final AbstractBaseTemplate madGladSadTemplate = MadGladSad();
   final AbstractBaseTemplate starfishTemplate = Starfish();
+  final CodeGenerator _codeGenerator = CodeGenerator();
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class TemplatePage extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, "/retro",arguments: madGladSadTemplate);
+                Navigator.pushNamed(context, "/retro",arguments: RetroPageParams(madGladSadTemplate,roomCodeGenerate(madGladSadTemplate.getTemplateTypeId())));
               },
               child: Container(
                 color: Theme.of(context).primaryColorDark,
@@ -32,7 +34,7 @@ class TemplatePage extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, "/retro",arguments: starfishTemplate);
+                Navigator.pushNamed(context, "/retro",arguments: RetroPageParams(starfishTemplate,roomCodeGenerate(starfishTemplate.getTemplateTypeId())));
               },
               child: Container(
                 color: Theme.of(context).primaryColorDark,
@@ -42,5 +44,8 @@ class TemplatePage extends StatelessWidget {
             )
           ],
         ));
+  }
+  String roomCodeGenerate(int templateId){
+    return _codeGenerator.generateRoomCode(templateId);
   }
 }

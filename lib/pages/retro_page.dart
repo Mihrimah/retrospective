@@ -4,25 +4,29 @@ import 'package:flutter/services.dart';
 import 'package:retrospektif/core/code_generator.dart';
 import 'package:retrospektif/core/grouped_list_view.dart';
 import 'package:retrospektif/model/fake_data_model.dart';
+import 'package:retrospektif/model/retro_page_params.dart';
 import 'package:retrospektif/repository/fake_repository.dart';
 import 'package:retrospektif/template/abstract_base_template.dart';
 
 class RetroPage extends StatelessWidget {
-  String code;
+  RetroPageParams retroPageParams;
   final CodeGenerator _codeGenerator = CodeGenerator();
-  final snackBar = SnackBar(content: Text('Copied!'),duration: Duration(seconds: 1),);
+  final snackBar = SnackBar(
+    content: Text('Copied!'),
+    duration: Duration(seconds: 1),
+  );
+
+  RetroPage(this.retroPageParams);
 
   @override
   Widget build(BuildContext context) {
-    final AbstractBaseTemplate template =
-        ModalRoute.of(context).settings.arguments;
-    code = _codeGenerator.generateRoomCode(template.getTemplateTypeId());
-
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(56),
           child: Builder(
-            builder: (context) => AppBar(title: appBarTitle(code, context),),
+            builder: (context) => AppBar(
+              title: appBarTitle(retroPageParams.roomCode, context),
+            ),
           ),
         ),
         body: GroupedListView(

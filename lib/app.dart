@@ -9,7 +9,7 @@ class App extends StatelessWidget {
     '/start': (context) => StartPage(),
     '/choose_template': (context) => TemplatePage(),
     '/join_room': (context) => JoinPage(),
-    '/retro' : (context) => RetroPage()
+    '/retro' : (context) => RetroPage(ModalRoute.of(context).settings.arguments)
   };
 
   final darkTheme = ThemeData(
