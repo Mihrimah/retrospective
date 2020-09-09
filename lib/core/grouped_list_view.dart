@@ -1,8 +1,6 @@
 import 'dart:collection';
-import "package:collection/collection.dart";
+
 import 'package:flutter/material.dart';
-import 'package:retrospektif/model/fake_data_model.dart';
-import 'package:retrospektif/repository/fake_repository.dart';
 
 typedef G GroupFunction<T, G>(T element);
 typedef Widget ListBuilderFunction<T>(BuildContext context, T element);

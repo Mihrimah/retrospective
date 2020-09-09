@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:retrospektif/template/abstract_base_template.dart';
+import 'package:retrospektive/template/abstract_base_template.dart';
 
 class MadGladSad extends AbstractBaseTemplate {
   static final String templateName = "Mad Glad Sad";

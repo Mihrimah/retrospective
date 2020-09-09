@@ -1,19 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:retrospektif/core/code_generator.dart';
-import 'package:retrospektif/core/grouped_list_view.dart';
-import 'package:retrospektif/model/fake_data_model.dart';
-import 'package:retrospektif/model/retro_page_params.dart';
-import 'package:retrospektif/pages/waiting_content_page.dart';
-import 'package:retrospektif/repository/fake_repository.dart';
+import 'package:retrospektive/core/grouped_list_view.dart';
+import 'package:retrospektive/model/fake_data_model.dart';
+import 'package:retrospektive/model/retro_page_params.dart';
+import 'package:retrospektive/pages/waiting_content_page.dart';
+import 'package:retrospektive/repository/fake_repository.dart';
+import 'package:retrospektive/repository/firebase_repository.dart';
 
 import 'add_new_content_page.dart';
 
 class RetroPage extends StatelessWidget {
   RetroPageParams retroPageParams;
   final FakeRepository _fakeRepository = FakeRepository();
-  final CodeGenerator _codeGenerator = CodeGenerator();
+  final FirebaseRepository _firebaseRepository = FirebaseRepository();
   final snackBar = SnackBar(
     content: Text('Copied!'),
     duration: Duration(seconds: 1),
@@ -45,18 +45,18 @@ class RetroPage extends StatelessWidget {
           ),
         ),
         body: StreamBuilder(
-          stream: _fakeRepository.getRoomData(retroPageParams.roomCode,
-              retroPageParams.template.getTemplateTypeId()),
+          stream: _firebaseRepository.getRoomDataStream(retroPageParams.roomCode,retroPageParams.template.getTemplateTypeId()),
           builder: (context, snapshot) {
             if (!snapshot.hasData) return buildWaitingScreen();
-            if (snapshot.data.length == 0) return WaitingContentPage();
+            if (snapshot.data.documents.length == 0) return WaitingContentPage();
+            List<FakeDataModel> list = FakeDataModel.toBuilder(snapshot);
             return GroupedListView(
               groupBy: (FakeDataModel t) => t.templateTitle,
               groupBuilder: (BuildContext context, String title) =>
                   _headerWidget(title),
               listBuilder: (BuildContext context, FakeDataModel t) =>
                   _listWidget(t),
-              list: snapshot.data,
+              list: list,
             );
           },
         ));
@@ -98,7 +98,7 @@ class RetroPage extends StatelessWidget {
           style: TextStyle(fontSize: 15),
         ),
         IconButton(
-          icon: Icon(Icons.favorite),
+          icon: Icon(Icons.favorite,color: Colors.red,),
           onPressed: () {
             print("kalp!");
           },

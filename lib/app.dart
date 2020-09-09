@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:retrospektif/pages/add_new_content_page.dart';
-import 'package:retrospektif/pages/join_page.dart';
-import 'package:retrospektif/pages/retro_page.dart';
-import 'package:retrospektif/pages/start_page.dart';
-import 'package:retrospektif/pages/template_page.dart';
+import 'package:retrospektive/pages/join_page.dart';
+import 'package:retrospektive/pages/retro_page.dart';
+import 'package:retrospektive/pages/start_page.dart';
+import 'package:retrospektive/pages/template_page.dart';
 
 class App extends StatelessWidget {
   final routes = {

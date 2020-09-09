@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:retrospektif/model/retro_page_params.dart';
-import 'package:retrospektif/template/abstract_base_template.dart';
-import 'package:retrospektif/template/mad_glad_sad.dart';
-import 'package:retrospektif/template/starfish.dart';
+import 'package:retrospektive/model/retro_page_params.dart';
+import 'package:retrospektive/template/abstract_base_template.dart';
+import 'package:retrospektive/template/mad_glad_sad.dart';
+import 'package:retrospektive/template/starfish.dart';
 
 class StartPage extends StatefulWidget {
   @override
