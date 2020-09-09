@@ -111,13 +111,13 @@ class RetroPage extends StatelessWidget {
     return Row(
       children: [
         Text(code),
-        FlatButton(
+        /*FlatButton(
           child: Icon(Icons.content_copy),
           onPressed: () {
             Clipboard.setData(ClipboardData(text: code));
             Scaffold.of(context).showSnackBar(snackBar);
           },
-        )
+        )*/
       ],
     );
   }

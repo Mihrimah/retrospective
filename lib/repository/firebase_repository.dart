@@ -20,7 +20,7 @@ class FirebaseRepository {
   }
 
   Stream<QuerySnapshot> findStarfishByRoomCode(String roomCode) {
-    return madsadgladCollection
+    return starfishCollection
         .where("roomCode", isEqualTo: roomCode)
         .snapshots();
   }
