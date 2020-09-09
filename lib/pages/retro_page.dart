@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,14 +6,12 @@ import 'package:retrospektive/core/grouped_list_view.dart';
 import 'package:retrospektive/model/fake_data_model.dart';
 import 'package:retrospektive/model/retro_page_params.dart';
 import 'package:retrospektive/pages/waiting_content_page.dart';
-import 'package:retrospektive/repository/fake_repository.dart';
 import 'package:retrospektive/repository/firebase_repository.dart';
 
 import 'add_new_content_page.dart';
 
 class RetroPage extends StatelessWidget {
   RetroPageParams retroPageParams;
-  final FakeRepository _fakeRepository = FakeRepository();
   final FirebaseRepository _firebaseRepository = FirebaseRepository();
   final snackBar = SnackBar(
     content: Text('Copied!'),
@@ -35,7 +34,7 @@ class RetroPage extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => AddNewContentPage(retroPageParams,_fakeRepository, _firebaseRepository)),
+                      MaterialPageRoute(builder: (context) => AddNewContentPage(retroPageParams, _firebaseRepository)),
                     );
                     Navigator.pushNamed(context, "/add_new_content",arguments: retroPageParams);
                   },
@@ -85,22 +84,26 @@ class RetroPage extends StatelessWidget {
         fakeDataModel.textContent,
         style: TextStyle(fontSize: 16),
       ),
-      trailing: _favouriteCountAndIcon(fakeDataModel.likeCount),
+      trailing: _favouriteCountAndIcon(fakeDataModel),
     );
   }
 
-  Widget _favouriteCountAndIcon(int likeCount) {
+  Widget _favouriteCountAndIcon(FakeDataModel fakeDataModel) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          likeCount.toString(),
+          fakeDataModel.likeCount.toString(),
           style: TextStyle(fontSize: 15),
         ),
         IconButton(
           icon: Icon(Icons.favorite,color: Colors.red,),
           onPressed: () {
-            print("kalp!");
+            Firestore.instance.runTransaction((transaction) async {
+              DocumentSnapshot freshSnap = await transaction.get(fakeDataModel.document.reference);
+              await transaction.update(freshSnap.reference, {
+                'likeCount': freshSnap['likeCount'] + 1,});
+            });
           },
         )
       ],

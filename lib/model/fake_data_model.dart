@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class FakeDataModel {
@@ -6,9 +7,10 @@ class FakeDataModel {
   String templateTitle;
   String textContent;
   int likeCount;
+  DocumentSnapshot document;
 
   FakeDataModel(this.roomCode, this.templateType, this.templateTitle,
-      this.textContent, this.likeCount);
+      this.textContent, this.likeCount, this.document);
 
   static List<FakeDataModel> toBuilder(AsyncSnapshot snapshot) {
     return snapshot.data.documents
@@ -17,7 +19,8 @@ class FakeDataModel {
             roomData['templateType'],
             roomData['templateTitle'],
             roomData['textContent'],
-            roomData['likeCount']))
+            roomData['likeCount'],
+            roomData))
         .toList().cast<FakeDataModel>();
   }
 }

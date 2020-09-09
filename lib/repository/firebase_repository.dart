@@ -43,7 +43,8 @@ class FirebaseRepository {
       'templateType': template.getTemplateTypeId(),
       'templateTitle': title,
       'textContent': text,
-      'likeCount': 0
+      'likeCount': 0,
+      'retroDate': DateTime.now()
     };
     if (template is MadGladSad) {
       await madsadgladCollection.add(item);
