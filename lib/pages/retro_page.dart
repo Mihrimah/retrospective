@@ -35,7 +35,7 @@ class RetroPage extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => AddNewContentPage(retroPageParams,_fakeRepository)),
+                      MaterialPageRoute(builder: (context) => AddNewContentPage(retroPageParams,_fakeRepository, _firebaseRepository)),
                     );
                     Navigator.pushNamed(context, "/add_new_content",arguments: retroPageParams);
                   },

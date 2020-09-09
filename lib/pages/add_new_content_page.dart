@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:retrospektive/model/retro_page_params.dart';
 import 'package:retrospektive/repository/fake_repository.dart';
+import 'package:retrospektive/repository/firebase_repository.dart';
 import 'package:retrospektive/template/abstract_base_template.dart';
 
 class AddNewContentPage extends StatefulWidget {
-  AddNewContentPage(this._retroPageParams, this._fakeRepository);
+  AddNewContentPage(this._retroPageParams, this._fakeRepository, this._firebaseRepository);
 
   RetroPageParams _retroPageParams;
   FakeRepository _fakeRepository;
+  FirebaseRepository _firebaseRepository;
 
   @override
   _AddNewContentPageState createState() => _AddNewContentPageState();
@@ -91,7 +93,7 @@ class _AddNewContentPageState extends State<AddNewContentPage> {
                         width: double.infinity,
                         child: RaisedButton(
                           onPressed: () {
-                            widget._fakeRepository.addContent(
+                            widget._firebaseRepository.createDocument(
                                 _addContentTextController.text,
                                 dropdownValue,
                                 widget._retroPageParams.roomCode,

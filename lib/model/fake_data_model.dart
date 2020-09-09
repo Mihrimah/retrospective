@@ -11,7 +11,7 @@ class FakeDataModel {
       this.textContent, this.likeCount);
 
   static List<FakeDataModel> toBuilder(AsyncSnapshot snapshot) {
-    List<FakeDataModel> a = snapshot.data.documents
+    return snapshot.data.documents
         .map((roomData) => FakeDataModel(
             roomData['roomCode'],
             roomData['templateType'],
@@ -19,6 +19,5 @@ class FakeDataModel {
             roomData['textContent'],
             roomData['likeCount']))
         .toList().cast<FakeDataModel>();
-    return a;
   }
 }
