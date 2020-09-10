@@ -3,6 +3,8 @@ import 'package:retrospektive/pages/join_page.dart';
 import 'package:retrospektive/pages/retro_page.dart';
 import 'package:retrospektive/pages/start_page.dart';
 import 'package:retrospektive/pages/template_page.dart';
+import "package:provider/provider.dart";
+import 'package:retrospektive/model/theme_provider.dart';
 
 class App extends StatelessWidget {
   final routes = {
@@ -13,21 +15,13 @@ class App extends StatelessWidget {
     //'/add_new_content': (context) => AddNewContentPage(ModalRoute.of(context).settings.arguments)
   };
 
-  final darkTheme = ThemeData(
-      primarySwatch: Colors.grey,
-      primaryColor: Colors.black,
-      brightness: Brightness.dark,
-      backgroundColor: const Color(0xFF212121),
-      accentColor: Colors.white,
-      accentIconTheme: IconThemeData(color: Colors.black),
-      dividerColor: Colors.black12);
-
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return MaterialApp(
       initialRoute: '/start',
       routes: routes,
-      theme: darkTheme,
+      theme: themeProvider.getThemeData,
       home: StartPage(),
     );
   }

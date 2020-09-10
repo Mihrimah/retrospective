@@ -3,6 +3,8 @@ import 'package:retrospektive/model/retro_page_params.dart';
 import 'package:retrospektive/template/abstract_base_template.dart';
 import 'package:retrospektive/template/mad_glad_sad.dart';
 import 'package:retrospektive/template/starfish.dart';
+import 'package:provider/provider.dart';
+import 'package:retrospektive/model/theme_provider.dart';
 
 class StartPage extends StatefulWidget {
   @override
@@ -16,6 +18,7 @@ class _StartPageState extends State<StartPage> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       body: Center(
         child: Container(
@@ -23,6 +26,16 @@ class _StartPageState extends State<StartPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Row(
+                  children: <Widget>[
+                    Switch(
+                      value: themeProvider.isLightTheme,
+                      onChanged: (val) {
+                        themeProvider.setThemeData = val;
+                      },
+                    ),
+                  ],
+                ),
                 Container(
                   width: double.infinity,
                   margin: EdgeInsets.only(right: 50, left: 50),
