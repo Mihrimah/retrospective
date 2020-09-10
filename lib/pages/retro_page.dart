@@ -73,7 +73,7 @@ class RetroPage extends StatelessWidget {
     return Container(
       color: Colors.lightBlue,
       padding: EdgeInsets.all(5),
-      margin: EdgeInsets.all(3),
+      margin: EdgeInsets.all(0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
