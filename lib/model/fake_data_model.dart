@@ -7,7 +7,7 @@ class FakeDataModel {
   String templateTitle;
   String textContent;
   int likeCount;
-  DocumentSnapshot document;
+  QueryDocumentSnapshot document;
 
   FakeDataModel(this.roomCode, this.templateType, this.templateTitle,
       this.textContent, this.likeCount, this.document);
@@ -15,11 +15,11 @@ class FakeDataModel {
   static List<FakeDataModel> toBuilder(AsyncSnapshot snapshot) {
     return snapshot.data.documents
         .map((roomData) => FakeDataModel(
-            roomData['roomCode'],
-            roomData['templateType'],
-            roomData['templateTitle'],
-            roomData['textContent'],
-            roomData['likeCount'],
+            roomData.data()['roomCode'],
+            roomData.data()['templateType'],
+            roomData.data()['templateTitle'],
+            roomData.data()['textContent'],
+            roomData.data()['likeCount'],
             roomData))
         .toList().cast<FakeDataModel>();
   }

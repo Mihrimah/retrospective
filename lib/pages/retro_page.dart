@@ -42,8 +42,8 @@ class RetroPage extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => AddNewContentPage(
-                      retroPageParams, _firebaseRepository)),
+                  builder: (context) =>
+                      AddNewContentPage(retroPageParams, _firebaseRepository)),
             );
           },
         ),
@@ -110,11 +110,11 @@ class RetroPage extends StatelessWidget {
             color: Colors.red,
           ),
           onPressed: () {
-            Firestore.instance.runTransaction((transaction) async {
+            FirebaseFirestore.instance.runTransaction((transaction) async {
               DocumentSnapshot freshSnap =
-                  await transaction.get(fakeDataModel.document.reference);
+              await transaction.get(fakeDataModel.document.reference);
               await transaction.update(freshSnap.reference, {
-                'likeCount': freshSnap['likeCount'] + 1,
+                'likeCount': freshSnap.data()['likeCount'] + 1,
               });
             });
           },
@@ -135,7 +135,10 @@ class RetroPage extends StatelessWidget {
               style: TextStyle(fontSize: 20),
             ),
             IconButton(
-              icon: Icon(Icons.content_copy, size: 20,),
+              icon: Icon(
+                Icons.content_copy,
+                size: 20,
+              ),
               onPressed: () {
                 Clipboard.setData(
                     ClipboardData(text: retroPageParams.roomCode));

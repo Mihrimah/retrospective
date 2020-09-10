@@ -5,13 +5,13 @@ import 'package:retrospektive/template/starfish.dart';
 
 class FirebaseRepository {
   final CollectionReference madsadgladCollection =
-      Firestore.instance.collection("madsadglad");
+  FirebaseFirestore.instance.collection("madsadglad");
 
   final CollectionReference sailorboatCollection =
-      Firestore.instance.collection("sailorboat");
+  FirebaseFirestore.instance.collection("sailorboat");
 
   final CollectionReference starfishCollection =
-      Firestore.instance.collection("starfish");
+  FirebaseFirestore.instance.collection("starfish");
 
   Stream<QuerySnapshot> findMadsadgladByRoomCode(String roomCode) {
     return madsadgladCollection
