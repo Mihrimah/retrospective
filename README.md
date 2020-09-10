@@ -1,6 +1,6 @@
-# retrospektif
+# retrospective
 
-A new Flutter project.
+A new Flutter project for Agile Retro
 
 ## Getting Started
 
