@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:retrospektive/template/abstract_base_template.dart';
 import 'package:retrospektive/template/mad_glad_sad.dart';
+import 'package:retrospektive/template/sailorboat.dart';
 import 'package:retrospektive/template/starfish.dart';
 
 class FirebaseRepository {
@@ -25,12 +26,20 @@ class FirebaseRepository {
         .snapshots();
   }
 
+  Stream<QuerySnapshot> findSailorboatRoomCode(String roomCode) {
+    return sailorboatCollection
+        .where("roomCode", isEqualTo: roomCode)
+        .snapshots();
+  }
+
   Stream<QuerySnapshot> getRoomDataStream(String roomCode, int templateId) {
     Stream<QuerySnapshot> roomDataStream;
     if (templateId == 1) {
       roomDataStream = findMadsadgladByRoomCode(roomCode);
     } else if (templateId == 2) {
       roomDataStream = findStarfishByRoomCode(roomCode);
+    } else if (templateId == 3) {
+      roomDataStream = findSailorboatRoomCode(roomCode);
     } else
       roomDataStream = null;
     return roomDataStream;
@@ -50,6 +59,8 @@ class FirebaseRepository {
       await madsadgladCollection.add(item);
     } else if (template is Starfish) {
       await starfishCollection.add(item);
+    } else if (template is Sailorboat) {
+      await sailorboatCollection.add(item);
     } else {
       throw new Exception("There is no template collection");
     }
