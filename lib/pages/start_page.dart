@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:retrospektive/model/retro_page_params.dart';
 import 'package:retrospektive/template/abstract_base_template.dart';
+import 'package:retrospektive/template/fourls.dart';
 import 'package:retrospektive/template/mad_glad_sad.dart';
 import 'package:retrospektive/template/sailorboat.dart';
 import 'package:retrospektive/template/starfish.dart';
@@ -129,6 +130,7 @@ class _StartPageState extends State<StartPage> {
     if(firstNumber == 1) return  MadGladSad();
     else if (firstNumber == 2) return  Starfish();
     else if (firstNumber == 3) return  Sailorboat();
+    else if (firstNumber == 4) return  FourLs();
     else return  MadGladSad();
   }
 }

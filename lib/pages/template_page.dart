@@ -5,11 +5,13 @@ import 'package:retrospektive/template/abstract_base_template.dart';
 import 'package:retrospektive/template/mad_glad_sad.dart';
 import 'package:retrospektive/template/sailorboat.dart';
 import 'package:retrospektive/template/starfish.dart';
+import 'package:retrospektive/template/fourls.dart';
 
 class TemplatePage extends StatelessWidget {
   final AbstractBaseTemplate madGladSadTemplate = MadGladSad();
   final AbstractBaseTemplate starfishTemplate = Starfish();
   final AbstractBaseTemplate sailorboatTemplate = Sailorboat();
+  final AbstractBaseTemplate fourLsTemplate = FourLs();
   final CodeGenerator _codeGenerator = CodeGenerator();
 
   @override
@@ -52,6 +54,16 @@ class TemplatePage extends StatelessWidget {
                 color: Theme.of(context).primaryColorDark,
                 padding: const EdgeInsets.all(8),
                 child: sailorboatTemplate.getTemplateWidget(),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, "/retro",arguments: RetroPageParams(fourLsTemplate,roomCodeGenerate(fourLsTemplate.getTemplateTypeId())));
+              },
+              child: Container(
+                color: Theme.of(context).primaryColorDark,
+                padding: const EdgeInsets.all(8),
+                child: fourLsTemplate.getTemplateWidget(),
               ),
             ),
           ],
