@@ -171,7 +171,7 @@ class _RetroPageState extends State<RetroPage>{
     if (likedRowsSet.contains(retroDataModel.document.id))
       return Icon(Icons.favorite, color: Colors.red);
     else
-      return Icon(Icons.favorite,color: Colors.white,);
+      return Icon(Icons.favorite,);
   }
 
   Widget appBarTitle(String code, BuildContext context) {
