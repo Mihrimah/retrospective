@@ -78,7 +78,7 @@ class TemplatePage extends StatelessWidget {
               child: Container(
                 color: Theme.of(context).primaryColorDark,
                 padding: const EdgeInsets.all(8),
-                child: stopStartContinueTemplate.getTemplateWidget(),
+                child: stopStartContinueTemplate.getTemplateWidget(context),
               ),
             ),
             GestureDetector(
@@ -88,7 +88,7 @@ class TemplatePage extends StatelessWidget {
               child: Container(
                 color: Theme.of(context).primaryColorDark,
                 padding: const EdgeInsets.all(8),
-                child: whatWentWellTemplate.getTemplateWidget(),
+                child: whatWentWellTemplate.getTemplateWidget(context),
               ),
             ),
           ],
