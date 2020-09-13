@@ -4,11 +4,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:retrospektive/core/grouped_list_view.dart';
+import 'package:retrospektive/localization/retrospective_localization.dart';
 import 'package:retrospektive/model/retro_data_model.dart';
 import 'package:retrospektive/model/retro_page_params.dart';
 import 'package:retrospektive/pages/waiting_content_page.dart';
 import 'package:retrospektive/repository/firebase_repository.dart';
+import 'package:retrospektive/repository/local_repository.dart';
 
 import 'add_new_content_page.dart';
 
@@ -21,12 +24,13 @@ class RetroPage extends StatefulWidget {
   _RetroPageState createState() => _RetroPageState();
 }
 
-class _RetroPageState extends State<RetroPage>{
+class _RetroPageState extends State<RetroPage> {
   final FirebaseRepository _firebaseRepository = FirebaseRepository();
-
+  LocalRepository _localRepository;
   Set likedRowsSet = new HashSet();
   int givenLikeCount = 0;
-
+  List<RetroDataModel> list;
+  int savedRecordlen = 0;
   final snackBar = SnackBar(
     content: Text('Copied!'),
     duration: Duration(seconds: 1),
@@ -34,6 +38,10 @@ class _RetroPageState extends State<RetroPage>{
 
   @override
   void initState() {
+    _localRepository = LocalRepository();
+    _localRepository
+        .getNumberOfSavedRecord()
+        .then((value) => savedRecordlen = value);
     super.initState();
   }
 
@@ -50,6 +58,29 @@ class _RetroPageState extends State<RetroPage>{
               ),
               flexibleSpace:
                   appBarTitle(widget.retroPageParams.roomCode, context),
+              actions: [
+                IconButton(
+                  icon: Icon(
+                    Icons.save,
+                    size: 30,
+                  ),
+                  onPressed: () {
+                    if (savedRecordlen < 5){
+                      _localRepository.addRoomDataToStorage(
+                          widget.retroPageParams.roomCode, list);
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text(RetrospectiveLocalization.of(context).save),
+                      duration: Duration(seconds: 2),
+                    ));
+                    }
+                    else
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                        content: Text(RetrospectiveLocalization.of(context).maxSavedDataMessage),
+                        duration: Duration(seconds: 2),
+                      ));
+                  },
+                ),
+              ],
             ),
           ),
         ),
@@ -72,7 +103,7 @@ class _RetroPageState extends State<RetroPage>{
             if (!snapshot.hasData) return buildWaitingScreen();
             if (snapshot.data.documents.length == 0)
               return WaitingContentPage();
-            List<RetroDataModel> list = RetroDataModel.toBuilder(snapshot);
+            list = RetroDataModel.toBuilder(snapshot);
             return GroupedListView(
               groupBy: (RetroDataModel t) => t.templateTitle,
               groupBuilder: (BuildContext context, String title) =>
@@ -99,7 +130,8 @@ class _RetroPageState extends State<RetroPage>{
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(title,
+          Text(
+            title,
             style: TextStyle(fontSize: 25),
           ),
         ],
@@ -127,13 +159,13 @@ class _RetroPageState extends State<RetroPage>{
         ),
         //Text(givenLikeCount.toString()),
         IconButton(
-            icon: favouriteIcon(retroDataModel),
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onPressed: () {
-              favouriteIconOnPress(retroDataModel);
-            },
-          ),
+          icon: favouriteIcon(retroDataModel),
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          onPressed: () {
+            favouriteIconOnPress(retroDataModel);
+          },
+        ),
       ],
     );
   }
@@ -170,7 +202,9 @@ class _RetroPageState extends State<RetroPage>{
     if (likedRowsSet.contains(retroDataModel.document.id))
       return Icon(Icons.favorite, color: Colors.red);
     else
-      return Icon(Icons.favorite,);
+      return Icon(
+        Icons.favorite,
+      );
   }
 
   Widget appBarTitle(String code, BuildContext context) {

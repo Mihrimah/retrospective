@@ -21,6 +21,18 @@ class RetroDataModel {
             roomData.data()['textContent'],
             roomData.data()['likeCount'],
             roomData))
-        .toList().cast<RetroDataModel>();
+        .toList()
+        .cast<RetroDataModel>();
   }
+
+  Map toJson() => {
+        'roomCode': roomCode,
+        'templateType': templateType,
+        'templateTitle': templateTitle,
+        'textContent': textContent,
+        'likeCount': likeCount
+      };
+
+  static fromJson(json) => RetroDataModel(json["roomCode"], json["templateType"],
+      json["templateTitle"], json["textContent"], json["likeCount"], null);
 }

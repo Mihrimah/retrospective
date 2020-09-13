@@ -22,7 +22,10 @@ class RetrospectiveLocalization{
       'sad' : 'SAD',
       'glad' : 'GLAD',
       'copy' : 'copied',
-      'chooseTemplate' : 'Choose Template'
+      'chooseTemplate' : 'Choose Template',
+      'historyList':'History',
+      'maxSavedDataMessage' : 'Maximum number of saved data limit exceeded',
+      'save': 'Saved'
     },
     'tr': {
       'title': 'Başlık',
@@ -36,10 +39,18 @@ class RetrospectiveLocalization{
       'sad' : 'Üzgün',
       'glad' : 'Şükran',
       'copy' : 'Kopyalandı',
-      'chooseTemplate' : 'Şablon Seç'
+      'chooseTemplate' : 'Şablon Seç',
+      'historyList':'Geçmiş',
+      'maxSavedDataMessage' : 'Maksimum kayıtlı olan oda limiti aşılamaz',
+      'save': 'Kaydedildi'
     },
   };
-
+  String get save {
+    return _localizedValues[locale.languageCode]['save'];
+  }
+  String get maxSavedDataMessage {
+    return _localizedValues[locale.languageCode]['maxSavedDataMessage'];
+  }
   String get title {
     return _localizedValues[locale.languageCode]['title'];
   }
@@ -51,6 +62,9 @@ class RetrospectiveLocalization{
   }
   String get joinRoom {
     return _localizedValues[locale.languageCode]['joinRoom'];
+  }
+  String get historyList {
+    return _localizedValues[locale.languageCode]['historyList'];
   }
   String get theme {
     return _localizedValues[locale.languageCode]['theme'];

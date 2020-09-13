@@ -92,6 +92,19 @@ class _StartPageState extends State<StartPage> {
                           } : null,
                           child: Text(RetrospectiveLocalization.of(context).joinRoom, style: Theme.of(context).textTheme.headline6,),
                         ),
+                      ),SizedBox(
+                        height: 10,
+                        width: double.infinity,
+                      ),
+                      SizedBox(
+                        height: 60,
+                        width: double.infinity,
+                        child: RaisedButton(
+                          onPressed: (){
+                            Navigator.pushNamed(context, "/saved_history");
+                          },
+                          child: Text(RetrospectiveLocalization.of(context).historyList, style: Theme.of(context).textTheme.headline6,),
+                        ),
                       ),
                     ],
                   ),

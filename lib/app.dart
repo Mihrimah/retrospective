@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:retrospektive/pages/retro_page.dart';
+import 'package:retrospektive/pages/saved_history_list_page.dart';
 import 'package:retrospektive/pages/start_page.dart';
 import 'package:retrospektive/pages/template_page.dart';
 import "package:provider/provider.dart";
@@ -13,6 +14,7 @@ class App extends StatelessWidget {
     '/start': (context) => StartPage(),
     '/choose_template': (context) => TemplatePage(),
     '/retro' : (context) => RetroPage(ModalRoute.of(context).settings.arguments),
+    '/saved_history' : (context) => SavedHistoryListPage(),
     //'/add_new_content': (context) => AddNewContentPage(ModalRoute.of(context).settings.arguments)
   };
 
