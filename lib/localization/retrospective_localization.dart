@@ -76,37 +76,4 @@ class RetrospectiveLocalization{
   String get chooseTemplate {
     return _localizedValues[locale.languageCode]['chooseTemplate'];
   }
-  String getTemplateTitleLocaleName(String val){
-    print(val);
-    if(val == "MAD"){
-      print("girdi");
-      return mad;
-    }else if(val == "SAD"){
-      return sad;
-    }
-    else if(val == "GLAD"){
-      return glad;
-    }
-    else if(val == "SAD"){
-      return sad;
-    }
-    else if(val == "SAD"){
-      return sad;
-    }
-    else if(val == "SAD"){
-      return sad;
-    }
-    else if(val == "SAD"){
-      return sad;
-    }
-    else if(val == "SAD"){
-      return sad;
-    }
-    else if(val == "SAD"){
-      return sad;
-    }
-    else if(val == "SAD"){
-      return sad;
-    }
-  }
 }

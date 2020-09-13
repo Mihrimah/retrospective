@@ -93,7 +93,7 @@ class _RetroPageState extends State<RetroPage>{
 
   Widget _listGroupedHeaderWidget(String title) {
     return Container(
-      color: Colors.lightBlue,
+      color: Colors.blueAccent,
       padding: EdgeInsets.all(5),
       margin: EdgeInsets.all(0),
       child: Column(
