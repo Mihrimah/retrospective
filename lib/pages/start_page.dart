@@ -3,6 +3,7 @@ import 'package:retrospektive/localization/retrospective_localization.dart';
 import 'package:retrospektive/model/retro_page_params.dart';
 import 'package:retrospektive/template/abstract_base_template.dart';
 import 'package:retrospektive/template/fourls.dart';
+import 'package:retrospektive/template/lean_coffee.dart';
 import 'package:retrospektive/template/mad_glad_sad.dart';
 import 'package:retrospektive/template/sailorboat.dart';
 import 'package:retrospektive/template/starfish.dart';
@@ -136,7 +137,8 @@ class _StartPageState extends State<StartPage> {
     else if (firstNumber == 3) return  Sailorboat();
     else if (firstNumber == 4) return  FourLs();
     else if (firstNumber == 5) return StopStartContinue();
-    else if(firstNumber == 6) return WhatWentWell();
+    else if (firstNumber == 6) return WhatWentWell();
+    else if (firstNumber == 7) return LeanCoffee();
     else return  MadGladSad();
   }
 }

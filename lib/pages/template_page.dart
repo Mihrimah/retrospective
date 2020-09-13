@@ -3,6 +3,7 @@ import 'package:retrospektive/core/code_generator.dart';
 import 'package:retrospektive/localization/retrospective_localization.dart';
 import 'package:retrospektive/model/retro_page_params.dart';
 import 'package:retrospektive/template/abstract_base_template.dart';
+import 'package:retrospektive/template/lean_coffee.dart';
 import 'package:retrospektive/template/mad_glad_sad.dart';
 import 'package:retrospektive/template/sailorboat.dart';
 import 'package:retrospektive/template/starfish.dart';
@@ -17,6 +18,7 @@ class TemplatePage extends StatelessWidget {
   final AbstractBaseTemplate fourLsTemplate = FourLs();
   final AbstractBaseTemplate stopStartContinueTemplate = StopStartContinue();
   final AbstractBaseTemplate whatWentWellTemplate = WhatWentWell();
+  final AbstractBaseTemplate leanCoffeeTemplate = LeanCoffee();
   final CodeGenerator _codeGenerator = CodeGenerator();
 
   @override
@@ -89,6 +91,16 @@ class TemplatePage extends StatelessWidget {
                 color: Theme.of(context).primaryColorDark,
                 padding: const EdgeInsets.all(8),
                 child: whatWentWellTemplate.getTemplateWidget(context),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, "/retro",arguments: RetroPageParams(leanCoffeeTemplate,roomCodeGenerate(leanCoffeeTemplate.getTemplateTypeId())));
+              },
+              child: Container(
+                color: Theme.of(context).primaryColorDark,
+                padding: const EdgeInsets.all(8),
+                child: leanCoffeeTemplate.getTemplateWidget(context),
               ),
             ),
           ],
