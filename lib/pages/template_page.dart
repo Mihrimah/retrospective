@@ -10,6 +10,7 @@ import 'package:retrospektive/template/starfish.dart';
 import 'package:retrospektive/template/fourls.dart';
 import 'package:retrospektive/template/stop_start_continue.dart';
 import 'package:retrospektive/template/what_went_well.dart';
+import 'package:retrospektive/template/wrap.dart';
 
 class TemplatePage extends StatelessWidget {
   final AbstractBaseTemplate madGladSadTemplate = MadGladSad();
@@ -19,6 +20,7 @@ class TemplatePage extends StatelessWidget {
   final AbstractBaseTemplate stopStartContinueTemplate = StopStartContinue();
   final AbstractBaseTemplate whatWentWellTemplate = WhatWentWell();
   final AbstractBaseTemplate leanCoffeeTemplate = LeanCoffee();
+  final AbstractBaseTemplate wrapTemplate = WrapTechnique();
   final CodeGenerator _codeGenerator = CodeGenerator();
 
   @override
@@ -101,6 +103,16 @@ class TemplatePage extends StatelessWidget {
                 color: Theme.of(context).primaryColorDark,
                 padding: const EdgeInsets.all(8),
                 child: leanCoffeeTemplate.getTemplateWidget(context),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, "/retro",arguments: RetroPageParams(wrapTemplate,roomCodeGenerate(wrapTemplate.getTemplateTypeId())));
+              },
+              child: Container(
+                color: Theme.of(context).primaryColorDark,
+                padding: const EdgeInsets.all(8),
+                child: wrapTemplate.getTemplateWidget(context),
               ),
             ),
           ],

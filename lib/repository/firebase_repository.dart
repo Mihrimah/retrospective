@@ -7,6 +7,7 @@ import 'package:retrospektive/template/sailorboat.dart';
 import 'package:retrospektive/template/starfish.dart';
 import 'package:retrospektive/template/stop_start_continue.dart';
 import 'package:retrospektive/template/what_went_well.dart';
+import 'package:retrospektive/template/wrap.dart';
 
 class FirebaseRepository {
   final CollectionReference madsadgladCollection =
@@ -29,6 +30,9 @@ class FirebaseRepository {
 
   final CollectionReference leancoffeeCollection =
   FirebaseFirestore.instance.collection("leancoffee");
+
+  final CollectionReference wrapCollection =
+  FirebaseFirestore.instance.collection("wrap");
 
   Stream<QuerySnapshot> findMadsadgladByRoomCode(String roomCode) {
     return madsadgladCollection
@@ -65,11 +69,19 @@ class FirebaseRepository {
         .where("roomCode", isEqualTo: roomCode)
         .snapshots();
   }
+
   Stream<QuerySnapshot> findLeancoffeeRoomCode(String roomCode) {
     return leancoffeeCollection
         .where("roomCode", isEqualTo: roomCode)
         .snapshots();
   }
+
+  Stream<QuerySnapshot> findWrapRoomCode(String roomCode) {
+    return wrapCollection
+        .where("roomCode", isEqualTo: roomCode)
+        .snapshots();
+  }
+
   Stream<QuerySnapshot> getRoomDataStream(String roomCode, int templateId) {
     Stream<QuerySnapshot> roomDataStream;
     if (templateId == 1) {
@@ -86,6 +98,8 @@ class FirebaseRepository {
       roomDataStream = findWhatwentwellRoomCode(roomCode);
     } else if (templateId == 7) {
       roomDataStream = findLeancoffeeRoomCode(roomCode);
+    } else if (templateId == 8) {
+      roomDataStream = findWrapRoomCode(roomCode);
     } else
       roomDataStream = null;
     return roomDataStream;
@@ -115,6 +129,8 @@ class FirebaseRepository {
       await whatwentwellCollection.add(item);
     } else if (template is LeanCoffee) {
       await leancoffeeCollection.add(item);
+    } else if (template is WrapTechnique) {
+      await wrapCollection.add(item);
     } else {
       throw new Exception("There is no template collection");
     }

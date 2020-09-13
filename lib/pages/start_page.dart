@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:retrospektive/model/theme_provider.dart';
 import 'package:retrospektive/template/stop_start_continue.dart';
 import 'package:retrospektive/template/what_went_well.dart';
+import 'package:retrospektive/template/wrap.dart';
 
 class StartPage extends StatefulWidget {
   @override
@@ -132,13 +133,14 @@ class _StartPageState extends State<StartPage> {
 
   AbstractBaseTemplate _parseRoomCode(String roomCode){
     int firstNumber =int.parse(roomCode.substring(0,1));
-    if(firstNumber == 1) return  MadGladSad();
-    else if (firstNumber == 2) return  Starfish();
-    else if (firstNumber == 3) return  Sailorboat();
-    else if (firstNumber == 4) return  FourLs();
+    if (firstNumber == 1) return MadGladSad();
+    else if (firstNumber == 2) return Starfish();
+    else if (firstNumber == 3) return Sailorboat();
+    else if (firstNumber == 4) return FourLs();
     else if (firstNumber == 5) return StopStartContinue();
     else if (firstNumber == 6) return WhatWentWell();
     else if (firstNumber == 7) return LeanCoffee();
+    else if (firstNumber == 8) return WrapTechnique();
     else return  MadGladSad();
   }
 }
