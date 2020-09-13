@@ -7,6 +7,8 @@ import 'package:retrospektive/template/sailorboat.dart';
 import 'package:retrospektive/template/starfish.dart';
 import 'package:provider/provider.dart';
 import 'package:retrospektive/model/theme_provider.dart';
+import 'package:retrospektive/template/stop_start_continue.dart';
+import 'package:retrospektive/template/what_went_well.dart';
 
 class StartPage extends StatefulWidget {
   @override
@@ -131,6 +133,8 @@ class _StartPageState extends State<StartPage> {
     else if (firstNumber == 2) return  Starfish();
     else if (firstNumber == 3) return  Sailorboat();
     else if (firstNumber == 4) return  FourLs();
+    else if (firstNumber == 5) return StopStartContinue();
+    else if(firstNumber == 6) return WhatWentWell();
     else return  MadGladSad();
   }
 }

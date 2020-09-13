@@ -1,7 +1,7 @@
 import 'package:retrospektive/template/abstract_base_template.dart';
 
 class FourLs extends AbstractBaseTemplate {
-  static final String templateName = "4Ls";
+  static final String templateName = "4 Ls";
   static final List<String> templateTitles = ["LIKED", "LEARNED", "LACKED", "LONGED FOR"];
   static final int templateType = 4;
 

@@ -4,6 +4,8 @@ import 'package:retrospektive/template/fourls.dart';
 import 'package:retrospektive/template/mad_glad_sad.dart';
 import 'package:retrospektive/template/sailorboat.dart';
 import 'package:retrospektive/template/starfish.dart';
+import 'package:retrospektive/template/stop_start_continue.dart';
+import 'package:retrospektive/template/what_went_well.dart';
 
 class FirebaseRepository {
   final CollectionReference madsadgladCollection =
@@ -17,6 +19,12 @@ class FirebaseRepository {
 
   final CollectionReference fourlsCollection =
   FirebaseFirestore.instance.collection("fourls");
+
+  final CollectionReference stopstartcontinueCollection =
+  FirebaseFirestore.instance.collection("stopstartcontinue");
+
+  final CollectionReference whatwentwellCollection =
+  FirebaseFirestore.instance.collection("whatwentwell");
 
   Stream<QuerySnapshot> findMadsadgladByRoomCode(String roomCode) {
     return madsadgladCollection
@@ -42,6 +50,18 @@ class FirebaseRepository {
         .snapshots();
   }
 
+  Stream<QuerySnapshot> findStopstartcontinueRoomCode(String roomCode) {
+    return stopstartcontinueCollection
+        .where("roomCode", isEqualTo: roomCode)
+        .snapshots();
+  }
+
+  Stream<QuerySnapshot> findWhatwentwellRoomCode(String roomCode) {
+    return whatwentwellCollection
+        .where("roomCode", isEqualTo: roomCode)
+        .snapshots();
+  }
+
   Stream<QuerySnapshot> getRoomDataStream(String roomCode, int templateId) {
     Stream<QuerySnapshot> roomDataStream;
     if (templateId == 1) {
@@ -52,6 +72,10 @@ class FirebaseRepository {
       roomDataStream = findSailorboatRoomCode(roomCode);
     } else if (templateId == 4) {
       roomDataStream = findFourlsRoomCode(roomCode);
+    } else if (templateId == 5) {
+      roomDataStream = findStopstartcontinueRoomCode(roomCode);
+    } else if (templateId == 6) {
+      roomDataStream = findWhatwentwellRoomCode(roomCode);
     } else
       roomDataStream = null;
     return roomDataStream;
@@ -75,6 +99,10 @@ class FirebaseRepository {
       await sailorboatCollection.add(item);
     } else if (template is FourLs) {
       await fourlsCollection.add(item);
+    } else if (template is StopStartContinue) {
+      await stopstartcontinueCollection.add(item);
+    } else if (template is WhatWentWell) {
+      await whatwentwellCollection.add(item);
     } else {
       throw new Exception("There is no template collection");
     }

@@ -1,7 +1,7 @@
 import 'package:retrospektive/template/abstract_base_template.dart';
 
 class Sailorboat extends AbstractBaseTemplate {
-  static final String templateName = "Sailorboat";
+  static final String templateName = "Sailor Boat";
   static final List<String> templateTitles = ["ANCHOR", "WIND"];
   static final int templateType = 3;
 
