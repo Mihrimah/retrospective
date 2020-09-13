@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 
 class ThemeProvider with ChangeNotifier {
@@ -25,6 +27,7 @@ final darkTheme = ThemeData(
   accentColor: Colors.white,
   accentIconTheme: IconThemeData(color: Colors.black),
   dividerColor: Colors.black54,
+  buttonTheme: ButtonThemeData(disabledColor:Colors.grey, buttonColor: Colors.blueAccent,)
 );
 
 final lightTheme = ThemeData(
@@ -35,4 +38,5 @@ final lightTheme = ThemeData(
   accentColor: Colors.black,
   accentIconTheme: IconThemeData(color: Colors.white),
   dividerColor: Colors.white54,
+  buttonTheme: ButtonThemeData(disabledColor:Colors.black12, buttonColor: Colors.blueAccent,)
 );

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:retrospektive/localization/retrospective_localization.dart';
 import 'package:retrospektive/model/retro_page_params.dart';
+import 'package:retrospektive/model/theme_provider.dart';
 import 'package:retrospektive/repository/firebase_repository.dart';
 
 class AddNewContentPage extends StatefulWidget {
@@ -32,6 +35,7 @@ class _AddNewContentPageState extends State<AddNewContentPage> {
 
   @override
   Widget build(BuildContext context) {
+    //final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       body: Center(
         child: Container(
@@ -49,10 +53,10 @@ class _AddNewContentPageState extends State<AddNewContentPage> {
                         child: DropdownButtonFormField<String>(
                           decoration: InputDecoration(
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
+                              borderSide: BorderSide(color: Theme.of(context).accentColor),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
+                              borderSide: BorderSide(color: Theme.of(context).accentColor),
                             ),
                           ),
                           value: dropdownValue,
@@ -83,12 +87,12 @@ class _AddNewContentPageState extends State<AddNewContentPage> {
                           maxLength: 200,
                           maxLines: 5,
                           decoration: InputDecoration(
-                            hintText: 'Add Content',
+                            hintText: RetrospectiveLocalization.of(context).addContent,
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
+                              borderSide: BorderSide(color: Theme.of(context).accentColor),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
+                              borderSide: BorderSide(color: Theme.of(context).accentColor),
                             ),
                           ),
                           controller: _addContentTextController,
@@ -103,7 +107,7 @@ class _AddNewContentPageState extends State<AddNewContentPage> {
                           width: double.infinity,
                           child: RaisedButton(
                             onPressed: !isEnabled ? null : (){createRetroRowAndPop();},
-                            child: Text("Add"),
+                            child: Text(RetrospectiveLocalization.of(context).add),
                           )),
                     ],
                   ),

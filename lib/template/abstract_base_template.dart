@@ -19,11 +19,11 @@ abstract class AbstractBaseTemplate {
     return this.titles;
   }
 
-  Widget getTemplateWidget() {
+  Widget getTemplateWidget(BuildContext context) {
     return Center(
         child: Text(
       name,
-      style: TextStyle(fontSize: 20),
+      style: TextStyle(color : Colors.white ,fontSize: 20),
     ));
   }
 }

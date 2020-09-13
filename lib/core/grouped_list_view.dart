@@ -45,8 +45,6 @@ class GroupedListView<T, G> extends StatelessWidget {
   // show widget
   @override
   Widget build(BuildContext context) {
-    print("list len : " + list.length.toString());
-
     return ListView.builder(
       shrinkWrap: true,
       itemCount: _list.length,

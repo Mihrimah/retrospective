@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:retrospektive/pages/join_page.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:retrospektive/pages/retro_page.dart';
 import 'package:retrospektive/pages/start_page.dart';
 import 'package:retrospektive/pages/template_page.dart';
 import "package:provider/provider.dart";
 import 'package:retrospektive/model/theme_provider.dart';
 
+import 'localization/retrospective_localizations_delegate.dart';
+
 class App extends StatelessWidget {
   final routes = {
     '/start': (context) => StartPage(),
     '/choose_template': (context) => TemplatePage(),
-    '/join_room': (context) => JoinPage(),
     '/retro' : (context) => RetroPage(ModalRoute.of(context).settings.arguments),
     //'/add_new_content': (context) => AddNewContentPage(ModalRoute.of(context).settings.arguments)
   };
@@ -23,6 +24,17 @@ class App extends StatelessWidget {
       routes: routes,
       theme: themeProvider.getThemeData,
       home: StartPage(),
+      localizationsDelegates: [
+        // ... app-specific localization delegate[s] here
+        const RetrospectiveLocalizationsDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('en', 'US'),
+        const Locale('tr', 'TR')
+      ],
     );
   }
 }
