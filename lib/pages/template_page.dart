@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:retrospektive/core/code_generator.dart';
+import 'package:retrospektive/localization/retrospective_localization.dart';
 import 'package:retrospektive/model/retro_page_params.dart';
 import 'package:retrospektive/template/abstract_base_template.dart';
 import 'package:retrospektive/template/mad_glad_sad.dart';
@@ -18,7 +19,7 @@ class TemplatePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Choose Template"),
+          title: Text(RetrospectiveLocalization.of(context).chooseTemplate),
         ),
         body: GridView.count(
           padding: const EdgeInsets.all(20),
@@ -33,7 +34,7 @@ class TemplatePage extends StatelessWidget {
               child: Container(
                 color: Theme.of(context).primaryColorDark,
                 padding: const EdgeInsets.all(8),
-                child: madGladSadTemplate.getTemplateWidget(),
+                child: madGladSadTemplate.getTemplateWidget(context),
               ),
             ),
             GestureDetector(
@@ -43,7 +44,7 @@ class TemplatePage extends StatelessWidget {
               child: Container(
                 color: Theme.of(context).primaryColorDark,
                 padding: const EdgeInsets.all(8),
-                child: starfishTemplate.getTemplateWidget(),
+                child: starfishTemplate.getTemplateWidget(context),
               ),
             ),
             GestureDetector(
@@ -53,7 +54,7 @@ class TemplatePage extends StatelessWidget {
               child: Container(
                 color: Theme.of(context).primaryColorDark,
                 padding: const EdgeInsets.all(8),
-                child: sailorboatTemplate.getTemplateWidget(),
+                child: sailorboatTemplate.getTemplateWidget(context),
               ),
             ),
             GestureDetector(
@@ -63,7 +64,7 @@ class TemplatePage extends StatelessWidget {
               child: Container(
                 color: Theme.of(context).primaryColorDark,
                 padding: const EdgeInsets.all(8),
-                child: fourLsTemplate.getTemplateWidget(),
+                child: fourLsTemplate.getTemplateWidget(context),
               ),
             ),
           ],

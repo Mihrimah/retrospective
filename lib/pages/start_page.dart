@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:retrospektive/localization/retrospective_localization.dart';
 import 'package:retrospektive/model/retro_page_params.dart';
 import 'package:retrospektive/template/abstract_base_template.dart';
 import 'package:retrospektive/template/fourls.dart';
@@ -28,21 +29,22 @@ class _StartPageState extends State<StartPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                  children: <Widget>[
-                    Switch(
-                      value: themeProvider.isLightTheme,
-                      onChanged: (val) {
-                        themeProvider.setThemeData = val;
-                      },
-                    ),
-                  ],
-                ),
                 Container(
                   width: double.infinity,
                   margin: EdgeInsets.only(right: 50, left: 50),
                   child: Column(
                     children: [
+                      Row(
+                        children: [
+                          Text(RetrospectiveLocalization.of(context).theme),
+                          Switch(
+                            value: themeProvider.isLightTheme,
+                            onChanged: (val) {
+                              themeProvider.setThemeData = val;
+                            },
+                          ),
+                        ],
+                      ),
                       SizedBox(
                         height: 60,
                         width: double.infinity,
@@ -50,8 +52,8 @@ class _StartPageState extends State<StartPage> {
                           onPressed: () {
                             Navigator.pushNamed(context, "/choose_template");
                           },
-                          child: Text("Create Room",
-                              style: Theme.of(context).textTheme.bodyText1),
+                          child: Text(RetrospectiveLocalization.of(context).createRoom,
+                              style: Theme.of(context).textTheme.headline6),
                         ),
                       ),
                       SizedBox(
@@ -61,13 +63,13 @@ class _StartPageState extends State<StartPage> {
                       SizedBox(
                         width: double.infinity,
                         child: TextFormField(
-                          decoration: const InputDecoration(
-                            hintText: 'Room code',
+                          decoration: InputDecoration(
+                            hintText: RetrospectiveLocalization.of(context).roomCode,
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
+                              borderSide: BorderSide(color: Theme.of(context).accentColor),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white),
+                              borderSide: BorderSide(color: Theme.of(context).accentColor),
                             ),
                           ),
                           controller: _textEditingController,
@@ -84,7 +86,7 @@ class _StartPageState extends State<StartPage> {
                           onPressed: isEnabled ? (){
                             Navigator.pushNamed(context, "/retro", arguments: RetroPageParams(_parseRoomCode(_textEditingController.text), _textEditingController.text));
                           } : null,
-                          child: Text("Join Room"),
+                          child: Text(RetrospectiveLocalization.of(context).joinRoom, style: Theme.of(context).textTheme.headline6,),
                         ),
                       ),
                     ],
