@@ -13,3 +13,6 @@ This application provides that below:
   - Continue List: Things that are already worked well in the previous iteration and should stay in the workflow.
   
   Mad Sad Glad is a popular Agile retrospective technique that promotes emotional well-being by encouraging team members to consider ways to improve morale and create a positive team environment. While “old school” corporate practices might have promoted hiding your emotions at work, this retrospective exercise gives teams the opportunity to let them fly! If you want to learn how the team feels after the previous sprint, Mad Sad Glad is a straightforward option that is easy to explain and run. Use the Mad Sad Glad retrospective template to check on the team's emotional wellbeing. Allow the team members to analyze the positive and negative emotions they may have experienced during past projects. It will allow you to build a positive team dynamic that will improve communication and increase productivity in the long run.
+  - Mad: Things that the team found frustrating in the last iteration
+  - Sad: Things that the team found disappointing in the last iteration
+  - Glad: Things that made the team happy and excited in the last iteration
