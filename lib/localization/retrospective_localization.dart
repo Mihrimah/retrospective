@@ -25,7 +25,8 @@ class RetrospectiveLocalization{
       'chooseTemplate' : 'Choose Template',
       'historyList':'History',
       'maxSavedDataMessage' : 'Maximum number of saved data limit exceeded',
-      'save': 'Saved'
+      'save': 'Saved',
+      'nocontent' : 'No content yet'
     },
     'tr': {
       'title': 'Başlık',
@@ -42,11 +43,15 @@ class RetrospectiveLocalization{
       'chooseTemplate' : 'Şablon Seç',
       'historyList':'Geçmiş',
       'maxSavedDataMessage' : 'Maksimum kayıtlı olan oda limiti aşılamaz',
-      'save': 'Kaydedildi'
+      'save': 'Kaydedildi',
+      'nocontent' : 'Henüz veri yok'
     },
   };
   String get save {
     return _localizedValues[locale.languageCode]['save'];
+  }
+  String get nocontent {
+    return _localizedValues[locale.languageCode]['nocontent'];
   }
   String get maxSavedDataMessage {
     return _localizedValues[locale.languageCode]['maxSavedDataMessage'];

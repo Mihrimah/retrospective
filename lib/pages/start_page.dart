@@ -38,16 +38,13 @@ class _StartPageState extends State<StartPage> {
                   margin: EdgeInsets.only(right: 50, left: 50),
                   child: Column(
                     children: [
-                      Row(
-                        children: [
-                          Text(RetrospectiveLocalization.of(context).theme),
-                          Switch(
-                            value: themeProvider.isLightTheme,
-                            onChanged: (val) {
-                              themeProvider.setThemeData = val;
-                            },
-                          ),
-                        ],
+                      Center(
+                        child: Switch(
+                          value: themeProvider.isLightTheme,
+                          onChanged: (val) {
+                            themeProvider.setThemeData = val;
+                          },
+                        ),
                       ),
                       SizedBox(
                         height: 60,
@@ -56,7 +53,8 @@ class _StartPageState extends State<StartPage> {
                           onPressed: () {
                             Navigator.pushNamed(context, "/choose_template");
                           },
-                          child: Text(RetrospectiveLocalization.of(context).createRoom,
+                          child: Text(
+                              RetrospectiveLocalization.of(context).createRoom,
                               style: Theme.of(context).textTheme.headline6),
                         ),
                       ),
@@ -68,12 +66,15 @@ class _StartPageState extends State<StartPage> {
                         width: double.infinity,
                         child: TextFormField(
                           decoration: InputDecoration(
-                            hintText: RetrospectiveLocalization.of(context).roomCode,
+                            hintText:
+                                RetrospectiveLocalization.of(context).roomCode,
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Theme.of(context).accentColor),
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).accentColor),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Theme.of(context).accentColor),
+                              borderSide: BorderSide(
+                                  color: Theme.of(context).accentColor),
                             ),
                           ),
                           controller: _textEditingController,
@@ -87,12 +88,22 @@ class _StartPageState extends State<StartPage> {
                         height: 60,
                         width: double.infinity,
                         child: RaisedButton(
-                          onPressed: isEnabled ? (){
-                            Navigator.pushNamed(context, "/retro", arguments: RetroPageParams(_parseRoomCode(_textEditingController.text), _textEditingController.text));
-                          } : null,
-                          child: Text(RetrospectiveLocalization.of(context).joinRoom, style: Theme.of(context).textTheme.headline6,),
+                          onPressed: isEnabled
+                              ? () {
+                                  Navigator.pushNamed(context, "/retro",
+                                      arguments: RetroPageParams(
+                                          _parseRoomCode(
+                                              _textEditingController.text),
+                                          _textEditingController.text));
+                                }
+                              : null,
+                          child: Text(
+                            RetrospectiveLocalization.of(context).joinRoom,
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
                         ),
-                      ),SizedBox(
+                      ),
+                      SizedBox(
                         height: 10,
                         width: double.infinity,
                       ),
@@ -100,10 +111,13 @@ class _StartPageState extends State<StartPage> {
                         height: 60,
                         width: double.infinity,
                         child: RaisedButton(
-                          onPressed: (){
+                          onPressed: () {
                             Navigator.pushNamed(context, "/saved_history");
                           },
-                          child: Text(RetrospectiveLocalization.of(context).historyList, style: Theme.of(context).textTheme.headline6,),
+                          child: Text(
+                            RetrospectiveLocalization.of(context).historyList,
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
                         ),
                       ),
                     ],
@@ -144,16 +158,25 @@ class _StartPageState extends State<StartPage> {
     }
   }
 
-  AbstractBaseTemplate _parseRoomCode(String roomCode){
-    int firstNumber =int.parse(roomCode.substring(0,1));
-    if (firstNumber == 1) return MadGladSad();
-    else if (firstNumber == 2) return Starfish();
-    else if (firstNumber == 3) return Sailorboat();
-    else if (firstNumber == 4) return FourLs();
-    else if (firstNumber == 5) return StopStartContinue();
-    else if (firstNumber == 6) return WhatWentWell();
-    else if (firstNumber == 7) return LeanCoffee();
-    else if (firstNumber == 8) return WrapTechnique();
-    else return  MadGladSad();
+  AbstractBaseTemplate _parseRoomCode(String roomCode) {
+    int firstNumber = int.parse(roomCode.substring(0, 1));
+    if (firstNumber == 1)
+      return MadGladSad();
+    else if (firstNumber == 2)
+      return Starfish();
+    else if (firstNumber == 3)
+      return Sailorboat();
+    else if (firstNumber == 4)
+      return FourLs();
+    else if (firstNumber == 5)
+      return StopStartContinue();
+    else if (firstNumber == 6)
+      return WhatWentWell();
+    else if (firstNumber == 7)
+      return LeanCoffee();
+    else if (firstNumber == 8)
+      return WrapTechnique();
+    else
+      return MadGladSad();
   }
 }

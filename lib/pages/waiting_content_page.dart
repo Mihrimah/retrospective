@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:retrospektive/localization/retrospective_localization.dart';
 
 class WaitingContentPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("No content yet", style: TextStyle(fontSize: 25),));
+    return Center(child: Text(RetrospectiveLocalization.of(context).nocontent, style: TextStyle(fontSize: 25),));
   }
 }
