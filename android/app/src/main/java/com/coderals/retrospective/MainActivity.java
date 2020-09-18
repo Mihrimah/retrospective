@@ -1,4 +1,4 @@
-package com.retrospective;
+package com.coderals.retrospective;
 
 import io.flutter.embedding.android.FlutterActivity;
 
