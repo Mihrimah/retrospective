@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:retrospektive/model/retro_data_model.dart';
+import 'package:retrospective/model/retro_data_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalRepository {

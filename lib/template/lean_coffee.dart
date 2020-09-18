@@ -1,4 +1,4 @@
-import 'package:retrospektive/template/abstract_base_template.dart';
+import 'package:retrospective/template/abstract_base_template.dart';
 
 class LeanCoffee extends AbstractBaseTemplate {
   static final String templateName = "Lean Coffee";

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:retrospektive/localization/retrospective_localization.dart';
-import 'package:retrospektive/model/retro_page_params.dart';
-import 'package:retrospektive/repository/firebase_repository.dart';
+import 'package:retrospective/localization/retrospective_localization.dart';
+import 'package:retrospective/model/retro_page_params.dart';
+import 'package:retrospective/repository/firebase_repository.dart';
 
 class AddNewContentPage extends StatefulWidget {
   AddNewContentPage(this._retroPageParams, this._firebaseRepository);

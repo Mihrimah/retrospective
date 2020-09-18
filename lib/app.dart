@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:retrospektive/pages/retro_page.dart';
-import 'package:retrospektive/pages/saved_history_list_page.dart';
-import 'package:retrospektive/pages/start_page.dart';
-import 'package:retrospektive/pages/template_page.dart';
+import 'package:retrospective/pages/retro_page.dart';
+import 'package:retrospective/pages/saved_history_list_page.dart';
+import 'package:retrospective/pages/start_page.dart';
+import 'package:retrospective/pages/template_page.dart';
 import "package:provider/provider.dart";
-import 'package:retrospektive/model/theme_provider.dart';
+import 'package:retrospective/model/theme_provider.dart';
 
 import 'localization/retrospective_localizations_delegate.dart';
 

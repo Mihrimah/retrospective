@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:retrospektive/localization/retrospective_localization.dart';
+import 'package:retrospective/localization/retrospective_localization.dart';
 
 class WaitingContentPage extends StatelessWidget{
   @override

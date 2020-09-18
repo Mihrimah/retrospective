@@ -1,4 +1,4 @@
-import 'package:retrospektive/template/abstract_base_template.dart';
+import 'package:retrospective/template/abstract_base_template.dart';
 
 class RetroPageParams {
   RetroPageParams(this.template, this.roomCode);

@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:retrospektive/template/abstract_base_template.dart';
-import 'package:retrospektive/template/fourls.dart';
-import 'package:retrospektive/template/lean_coffee.dart';
-import 'package:retrospektive/template/mad_glad_sad.dart';
-import 'package:retrospektive/template/sailorboat.dart';
-import 'package:retrospektive/template/starfish.dart';
-import 'package:retrospektive/template/stop_start_continue.dart';
-import 'package:retrospektive/template/what_went_well.dart';
-import 'package:retrospektive/template/wrap.dart';
+import 'package:retrospective/template/abstract_base_template.dart';
+import 'package:retrospective/template/fourls.dart';
+import 'package:retrospective/template/lean_coffee.dart';
+import 'package:retrospective/template/mad_glad_sad.dart';
+import 'package:retrospective/template/sailorboat.dart';
+import 'package:retrospective/template/starfish.dart';
+import 'package:retrospective/template/stop_start_continue.dart';
+import 'package:retrospective/template/what_went_well.dart';
+import 'package:retrospective/template/wrap.dart';
 
 class FirebaseRepository {
   final CollectionReference madsadgladCollection =

@@ -5,13 +5,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:retrospektive/core/grouped_list_view.dart';
-import 'package:retrospektive/localization/retrospective_localization.dart';
-import 'package:retrospektive/model/retro_data_model.dart';
-import 'package:retrospektive/model/retro_page_params.dart';
-import 'package:retrospektive/pages/waiting_content_page.dart';
-import 'package:retrospektive/repository/firebase_repository.dart';
-import 'package:retrospektive/repository/local_repository.dart';
+import 'package:retrospective/core/grouped_list_view.dart';
+import 'package:retrospective/localization/retrospective_localization.dart';
+import 'package:retrospective/model/retro_data_model.dart';
+import 'package:retrospective/model/retro_page_params.dart';
+import 'package:retrospective/pages/waiting_content_page.dart';
+import 'package:retrospective/repository/firebase_repository.dart';
+import 'package:retrospective/repository/local_repository.dart';
 
 import 'add_new_content_page.dart';
 

@@ -1,4 +1,4 @@
-import 'package:retrospektive/template/abstract_base_template.dart';
+import 'package:retrospective/template/abstract_base_template.dart';
 
 class WrapTechnique extends AbstractBaseTemplate {
   static final String templateName = "W.R.A.P.";
