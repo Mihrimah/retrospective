@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:retrospective/core/code_generator.dart';
 import 'package:retrospective/localization/retrospective_localization.dart';
 import 'package:retrospective/model/retro_page_params.dart';
+import 'package:retrospective/repository/firebase_repository.dart';
 import 'package:retrospective/template/abstract_base_template.dart';
 import 'package:retrospective/template/lean_coffee.dart';
 import 'package:retrospective/template/mad_glad_sad.dart';
@@ -22,7 +23,7 @@ class TemplatePage extends StatelessWidget {
   final AbstractBaseTemplate leanCoffeeTemplate = LeanCoffee();
   final AbstractBaseTemplate wrapTemplate = WrapTechnique();
   final CodeGenerator _codeGenerator = CodeGenerator();
-
+  final FirebaseRepository _firebaseRepository = FirebaseRepository();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -119,6 +120,8 @@ class TemplatePage extends StatelessWidget {
         ));
   }
   String roomCodeGenerate(int templateId){
-    return _codeGenerator.generateRoomCode(templateId);
+     String roomCode = _codeGenerator.generateRoomCode(templateId);
+    _firebaseRepository.createRoomDetail(roomCode, templateId);
+    return roomCode;
   }
 }

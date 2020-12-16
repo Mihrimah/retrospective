@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:retrospective/core/grouped_list_view.dart';
 import 'package:retrospective/localization/retrospective_localization.dart';
 import 'package:retrospective/model/retro_data_model.dart';
@@ -31,6 +30,7 @@ class _RetroPageState extends State<RetroPage> {
   int givenLikeCount = 0;
   List<RetroDataModel> list;
   int savedRecordlen = 0;
+
   final snackBar = SnackBar(
     content: Text('Copied!'),
     duration: Duration(seconds: 1),
@@ -38,15 +38,28 @@ class _RetroPageState extends State<RetroPage> {
 
   @override
   void initState() {
+    super.initState();
     _localRepository = LocalRepository();
     _localRepository
         .getNumberOfSavedRecord()
         .then((value) => savedRecordlen = value);
-    super.initState();
+    print("init state reetro page");
+    _firebaseRepository.increaseActiveMember(widget.retroPageParams.roomCode);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _firebaseRepository.decreaseActiveMember(widget.retroPageParams.roomCode);
+    print("dispose runned retro page");
   }
 
   @override
   Widget build(BuildContext context) {
+    print(
+        "bottom height " + MediaQuery.of(context).viewInsets.bottom.toString());
+    print("bottom height2 " + MediaQuery.of(context).padding.bottom.toString());
+
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(90),
@@ -65,17 +78,18 @@ class _RetroPageState extends State<RetroPage> {
                     size: 30,
                   ),
                   onPressed: () {
-                    if (savedRecordlen < 5){
+                    if (savedRecordlen < 5) {
                       _localRepository.addRoomDataToStorage(
                           widget.retroPageParams.roomCode, list);
-                    Scaffold.of(context).showSnackBar(SnackBar(
-                      content: Text(RetrospectiveLocalization.of(context).save),
-                      duration: Duration(seconds: 2),
-                    ));
-                    }
-                    else
                       Scaffold.of(context).showSnackBar(SnackBar(
-                        content: Text(RetrospectiveLocalization.of(context).maxSavedDataMessage),
+                        content:
+                            Text(RetrospectiveLocalization.of(context).save),
+                        duration: Duration(seconds: 2),
+                      ));
+                    } else
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                        content: Text(RetrospectiveLocalization.of(context)
+                            .maxSavedDataMessage),
                         duration: Duration(seconds: 2),
                       ));
                   },
@@ -97,22 +111,58 @@ class _RetroPageState extends State<RetroPage> {
           },
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-        body: StreamBuilder(
-          stream: getRoomDataStream(),
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) return buildWaitingScreen();
-            if (snapshot.data.documents.length == 0)
-              return WaitingContentPage();
-            list = RetroDataModel.toBuilder(snapshot);
-            return GroupedListView(
-              groupBy: (RetroDataModel t) => t.templateTitle,
-              groupBuilder: (BuildContext context, String title) =>
-                  _listGroupedHeaderWidget(title),
-              listBuilder: (BuildContext context, RetroDataModel t) =>
-                  _listRowWidget(t),
-              list: list,
-            );
-          },
+        body: Column(
+          children: [
+            Expanded(
+              child: StreamBuilder(
+                stream: getRoomDataStream(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) return buildWaitingScreen();
+                  if (snapshot.data.documents.length == 0)
+                    return WaitingContentPage();
+                  list = RetroDataModel.toBuilder(snapshot);
+                  return GroupedListView(
+                    groupBy: (RetroDataModel t) => t.templateTitle,
+                    groupBuilder: (BuildContext context, String title) =>
+                        _listGroupedHeaderWidget(title),
+                    listBuilder: (BuildContext context, RetroDataModel t) =>
+                        _listRowWidget(t),
+                    list: list,
+                  );
+                },
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.green,
+                    ),
+                    alignment: Alignment.bottomRight,
+                    width: 70,
+                    height: 30,
+                    margin: EdgeInsets.only(right: 15, bottom: 2),
+                    child: Center(
+                        child: StreamBuilder(
+                      stream: _firebaseRepository
+                          .findRoomsDetail(widget.retroPageParams.roomCode),
+                      builder: (context, snapshot) {
+                        int activeMember;
+                        if (snapshot.hasData) {
+                          activeMember = snapshot.data.data()["activeMember"];
+                        } else
+                          activeMember = 0;
+                        return Text(
+                          "Active: $activeMember",
+                          style: TextStyle(color: Colors.white),
+                        );
+                      },
+                    ))),
+              ],
+            ),
+          ],
         ));
   }
 
