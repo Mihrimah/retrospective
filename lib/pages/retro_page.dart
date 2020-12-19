@@ -31,6 +31,8 @@ class _RetroPageState extends State<RetroPage> {
   int givenLikeCount = 0;
   List<RetroDataModel> list;
   int savedRecordlen = 0;
+  TextEditingController _textEditingController = TextEditingController();
+  bool isEnabled = false;
 
   final snackBar = SnackBar(
     content: Text('Copied!'),
@@ -57,10 +59,6 @@ class _RetroPageState extends State<RetroPage> {
 
   @override
   Widget build(BuildContext context) {
-    print(
-        "bottom height " + MediaQuery.of(context).viewInsets.bottom.toString());
-    print("bottom height2 " + MediaQuery.of(context).padding.bottom.toString());
-
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(90),
@@ -80,9 +78,41 @@ class _RetroPageState extends State<RetroPage> {
                     size: 30,
                   ),
                   onPressed: () {
-                    Mail.Mailer m = Mail.Mailer(
-                        list: list, toAddress: "erkanerkisi@gmail.com");
-                    m.sendMail();
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext ctx) {
+                        // return object of type Dialog
+                        return AlertDialog(
+                          title: new Text("Send Mail"),
+                          content: TextFormField(
+                            decoration: InputDecoration(
+                              hintText: "Email address",
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).accentColor),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).accentColor),
+                              ),
+                            ),
+                            controller: _textEditingController,
+                          ),
+                          actions: <Widget>[
+                            // usually buttons at the bottom of the dialog
+                            new FlatButton(
+                              child: new Text("Send",
+                                  style: Theme.of(context).textTheme.headline6),
+                              onPressed: (){
+                                if(_textEditingController.value.text != null && _textEditingController.value.text !='')
+                                      sendMail(context, _textEditingController.value.text);
+                                      Navigator.of(context).pop();
+                                    }
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   },
                 ),
                 IconButton(
@@ -177,6 +207,22 @@ class _RetroPageState extends State<RetroPage> {
             ),
           ],
         ));
+  }
+
+  sendMail(BuildContext context, String toAddress) async {
+    Mail.Mailer m = Mail.Mailer(list: list, toAddress: toAddress);
+    try {
+      await m.sendMail();
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text("Mail has been sent"),
+        duration: Duration(seconds: 2),
+      ));
+    } catch (e) {
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text('Mail has not been sent, Error : ' + e.toString()),
+        duration: Duration(seconds: 2),
+      ));
+    }
   }
 
   Stream getRoomDataStream() {

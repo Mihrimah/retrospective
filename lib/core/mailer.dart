@@ -30,8 +30,9 @@ class Mailer {
       print('Message sent: ' +
           sendReport.toString());
     } on MailerException catch (e) {
-      print('Message not sent. \n' +
+      print('Message failed: ' +
           e.toString());
+      throw e;
     }
   }
 

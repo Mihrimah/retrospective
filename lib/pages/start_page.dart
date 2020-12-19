@@ -19,7 +19,6 @@ class StartPage extends StatefulWidget {
 }
 
 class _StartPageState extends State<StartPage> {
-  String code;
   TextEditingController _textEditingController = TextEditingController();
   bool isEnabled = false;
 
