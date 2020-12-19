@@ -63,8 +63,9 @@ abstract class AbstractBaseTemplate {
                               // usually buttons at the bottom of the dialog
                               new FlatButton(
                                 child: new Text(
-                                    RetrospectiveLocalization.of(context)
-                                        .gotIt),
+                                    RetrospectiveLocalization.of(context).gotIt,
+                                    style:
+                                        Theme.of(context).textTheme.headline6),
                                 onPressed: () {
                                   // Close the dialog
                                   Navigator.of(context).pop();
@@ -89,8 +90,9 @@ abstract class AbstractBaseTemplate {
                               // usually buttons at the bottom of the dialog
                               new FlatButton(
                                 child: new Text(
-                                    RetrospectiveLocalization.of(context)
-                                        .gotIt),
+                                    RetrospectiveLocalization.of(context).gotIt,
+                                    style:
+                                        Theme.of(context).textTheme.headline6),
                                 onPressed: () {
                                   // Close the dialog
                                   Navigator.of(context).pop();
@@ -115,8 +117,9 @@ abstract class AbstractBaseTemplate {
                               // usually buttons at the bottom of the dialog
                               new FlatButton(
                                 child: new Text(
-                                    RetrospectiveLocalization.of(context)
-                                        .gotIt),
+                                    RetrospectiveLocalization.of(context).gotIt,
+                                    style:
+                                        Theme.of(context).textTheme.headline6),
                                 onPressed: () {
                                   // Close the dialog
                                   Navigator.of(context).pop();
@@ -141,8 +144,9 @@ abstract class AbstractBaseTemplate {
                               // usually buttons at the bottom of the dialog
                               new FlatButton(
                                 child: new Text(
-                                    RetrospectiveLocalization.of(context)
-                                        .gotIt),
+                                    RetrospectiveLocalization.of(context).gotIt,
+                                    style:
+                                        Theme.of(context).textTheme.headline6),
                                 onPressed: () {
                                   // Close the dialog
                                   Navigator.of(context).pop();
@@ -167,8 +171,9 @@ abstract class AbstractBaseTemplate {
                               // usually buttons at the bottom of the dialog
                               new FlatButton(
                                 child: new Text(
-                                    RetrospectiveLocalization.of(context)
-                                        .gotIt),
+                                    RetrospectiveLocalization.of(context).gotIt,
+                                    style:
+                                        Theme.of(context).textTheme.headline6),
                                 onPressed: () {
                                   // Close the dialog
                                   Navigator.of(context).pop();
@@ -193,8 +198,9 @@ abstract class AbstractBaseTemplate {
                               // usually buttons at the bottom of the dialog
                               new FlatButton(
                                 child: new Text(
-                                    RetrospectiveLocalization.of(context)
-                                        .gotIt),
+                                    RetrospectiveLocalization.of(context).gotIt,
+                                    style:
+                                        Theme.of(context).textTheme.headline6),
                                 onPressed: () {
                                   // Close the dialog
                                   Navigator.of(context).pop();
@@ -219,8 +225,9 @@ abstract class AbstractBaseTemplate {
                               // usually buttons at the bottom of the dialog
                               new FlatButton(
                                 child: new Text(
-                                    RetrospectiveLocalization.of(context)
-                                        .gotIt),
+                                    RetrospectiveLocalization.of(context).gotIt,
+                                    style:
+                                        Theme.of(context).textTheme.headline6),
                                 onPressed: () {
                                   // Close the dialog
                                   Navigator.of(context).pop();
@@ -244,8 +251,9 @@ abstract class AbstractBaseTemplate {
                               // usually buttons at the bottom of the dialog
                               new FlatButton(
                                 child: new Text(
-                                    RetrospectiveLocalization.of(context)
-                                        .gotIt),
+                                    RetrospectiveLocalization.of(context).gotIt,
+                                    style:
+                                        Theme.of(context).textTheme.headline6),
                                 onPressed: () {
                                   // Close the dialog
                                   Navigator.of(context).pop();
@@ -270,8 +278,9 @@ abstract class AbstractBaseTemplate {
                               // usually buttons at the bottom of the dialog
                               new FlatButton(
                                 child: new Text(
-                                    RetrospectiveLocalization.of(context)
-                                        .gotIt),
+                                    RetrospectiveLocalization.of(context).gotIt,
+                                    style:
+                                        Theme.of(context).textTheme.headline6),
                                 onPressed: () {
                                   // Close the dialog
                                   Navigator.of(context).pop();
