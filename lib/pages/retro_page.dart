@@ -12,7 +12,7 @@ import 'package:retrospective/pages/waiting_content_page.dart';
 import 'package:retrospective/repository/firebase_repository.dart';
 import 'package:retrospective/repository/local_repository.dart';
 import 'package:retrospective/template/fourls.dart';
-
+import 'package:retrospective/core/mailer.dart' as Mail;
 import 'add_new_content_page.dart';
 
 class RetroPage extends StatefulWidget {
@@ -74,6 +74,17 @@ class _RetroPageState extends State<RetroPage> {
               flexibleSpace:
                   appBarTitle(widget.retroPageParams.roomCode, context),
               actions: [
+                IconButton(
+                  icon: Icon(
+                    Icons.mail,
+                    size: 30,
+                  ),
+                  onPressed: () {
+                    Mail.Mailer m = Mail.Mailer(
+                        list: list, toAddress: "erkanerkisi@gmail.com");
+                    m.sendMail();
+                  },
+                ),
                 IconButton(
                   icon: Icon(
                     Icons.save,
