@@ -49,6 +49,7 @@ class _StartPageState extends State<StartPage> {
                         height: 60,
                         width: double.infinity,
                         child: RaisedButton(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
                           onPressed: () {
                             Navigator.pushNamed(context, "/choose_template");
                           },
@@ -87,6 +88,7 @@ class _StartPageState extends State<StartPage> {
                         height: 60,
                         width: double.infinity,
                         child: RaisedButton(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
                           onPressed: isEnabled
                               ? () {
                                   Navigator.pushNamed(context, "/retro",
@@ -110,6 +112,7 @@ class _StartPageState extends State<StartPage> {
                         height: 60,
                         width: double.infinity,
                         child: RaisedButton(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
                           onPressed: () {
                             Navigator.pushNamed(context, "/saved_history");
                           },

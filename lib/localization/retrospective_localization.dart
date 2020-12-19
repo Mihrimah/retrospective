@@ -24,6 +24,11 @@ class RetrospectiveLocalization{
       'maxSavedDataMessage' : 'Maximum number of saved data limit exceeded',
       'save': 'Saved',
       'gotIt': 'Got It!',
+      'send' : 'Send',
+      'sendMail' : 'Send Mail',
+      'emailAddress' : 'Enter Email Address',
+      'successEmailRequest' : 'Mail has been sent',
+      'failEmailRequest' : 'Mail has not been sent, Error :',
       'nocontent' : 'No content yet',
       'starfishInfo' : 'A starfish retrospective is named for its five points, where teams can articulate what to start doing, stop doing, keep doing, do more of, and do less of.',
       'sailorboatInfo' : 'A sailboat retrospective can illuminate all the things that are helping and hindering your scrum team.',
@@ -49,6 +54,11 @@ class RetrospectiveLocalization{
       'maxSavedDataMessage' : 'Maksimum kayıtlı olan oda limiti aşılamaz',
       'save': 'Kaydedildi',
       'gotIt': 'Anladım!',
+      'send' : 'Gönder',
+      'sendMail' : 'Mail Gönder',
+      'emailAddress' : 'Email Adresi gir',
+      'successEmailRequest' : 'Mail gönderildi',
+      'failEmailRequest' : 'Mail gönderilemedi, Hata :',
       'nocontent' : 'Henüz veri yok',
       'starfishInfo' : '5 temel konuyu ele alan Starfish methodu ile yapmaya başlanacak, devam edilecek, daha az yapılacak, daha çok yapılacak ve yapılmayacak olan aksiyonlar girilir.',
       'sailorboatInfo' : 'Ekibe yardımcı olan ve ekibi engelleyen her şey burada paylaşılır.',
@@ -61,7 +71,21 @@ class RetrospectiveLocalization{
       'freeformatInfo' : 'Takım üyeleri bu template formatında diledikleri yorumları girebilir.'
 },
   };
-
+  String get send {
+    return _localizedValues[locale.languageCode]['send'];
+  }
+  String get sendMail {
+    return _localizedValues[locale.languageCode]['sendMail'];
+  }
+  String get emailAddress {
+    return _localizedValues[locale.languageCode]['emailAddress'];
+  }
+  String get successEmailRequest {
+    return _localizedValues[locale.languageCode]['successEmailRequest'];
+  }
+  String get failEmailRequest {
+    return _localizedValues[locale.languageCode]['failEmailRequest'];
+  }
   String get save {
     return _localizedValues[locale.languageCode]['save'];
   }

@@ -83,10 +83,13 @@ class _RetroPageState extends State<RetroPage> {
                       builder: (BuildContext ctx) {
                         // return object of type Dialog
                         return AlertDialog(
-                          title: new Text("Send Mail"),
+                          title: new Text(RetrospectiveLocalization.of(context).sendMail),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(20.0))
+                          ),
                           content: TextFormField(
                             decoration: InputDecoration(
-                              hintText: "Email address",
+                              hintText: RetrospectiveLocalization.of(context).emailAddress,
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Theme.of(context).accentColor),
@@ -101,7 +104,7 @@ class _RetroPageState extends State<RetroPage> {
                           actions: <Widget>[
                             // usually buttons at the bottom of the dialog
                             new FlatButton(
-                              child: new Text("Send",
+                              child: new Text(RetrospectiveLocalization.of(context).send,
                                   style: Theme.of(context).textTheme.headline6),
                               onPressed: (){
                                 if(_textEditingController.value.text != null && _textEditingController.value.text !='')
@@ -214,12 +217,12 @@ class _RetroPageState extends State<RetroPage> {
     try {
       await m.sendMail();
       Scaffold.of(context).showSnackBar(SnackBar(
-        content: Text("Mail has been sent"),
+        content: Text(RetrospectiveLocalization.of(context).successEmailRequest),
         duration: Duration(seconds: 2),
       ));
     } catch (e) {
       Scaffold.of(context).showSnackBar(SnackBar(
-        content: Text('Mail has not been sent, Error : ' + e.toString()),
+        content: Text(RetrospectiveLocalization.of(context).failEmailRequest + e.toString()),
         duration: Duration(seconds: 2),
       ));
     }
