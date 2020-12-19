@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:collection';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,7 +12,6 @@ import 'package:retrospective/model/retro_page_params.dart';
 import 'package:retrospective/pages/waiting_content_page.dart';
 import 'package:retrospective/repository/firebase_repository.dart';
 import 'package:retrospective/repository/local_repository.dart';
-import 'package:retrospective/template/fourls.dart';
 import 'package:retrospective/core/mailer.dart' as Mail;
 import 'add_new_content_page.dart';
 
@@ -24,7 +24,7 @@ class RetroPage extends StatefulWidget {
   _RetroPageState createState() => _RetroPageState();
 }
 
-class _RetroPageState extends State<RetroPage> {
+class _RetroPageState extends State<RetroPage> with WidgetsBindingObserver {
   final FirebaseRepository _firebaseRepository = FirebaseRepository();
   LocalRepository _localRepository;
   Set likedRowsSet = new HashSet();
@@ -33,6 +33,8 @@ class _RetroPageState extends State<RetroPage> {
   int savedRecordlen = 0;
   TextEditingController _textEditingController = TextEditingController();
   bool isEnabled = false;
+  int activeMember = 0;
+  AppLifecycleState oldState;
 
   final snackBar = SnackBar(
     content: Text('Copied!'),
@@ -42,19 +44,45 @@ class _RetroPageState extends State<RetroPage> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _localRepository = LocalRepository();
     _localRepository
         .getNumberOfSavedRecord()
         .then((value) => savedRecordlen = value);
-    print("init state reetro page");
+    print("init state retro page");
     _firebaseRepository.increaseActiveMember(widget.retroPageParams.roomCode);
+    _firebaseRepository.findRoomsDetail(widget.retroPageParams.roomCode)
+        .listen((event) {
+      setState(() {
+        activeMember = event.data()["activeMember"];
+      });
+    });
+    oldState = AppLifecycleState.resumed;
   }
 
   @override
   void dispose() {
     super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
     _firebaseRepository.decreaseActiveMember(widget.retroPageParams.roomCode);
-    print("dispose runned retro page");
+    print("dispose ran retro page");
+  }
+
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    print("state : " + state.toString());
+    if((state == AppLifecycleState.inactive ||
+       state == AppLifecycleState.detached ||
+       state == AppLifecycleState.paused) && oldState == AppLifecycleState.resumed){
+      _firebaseRepository.decreaseActiveMember(widget.retroPageParams.roomCode);
+      print("didChangeAppLifecycleState ran retro page");
+    }
+    else if(state == AppLifecycleState.resumed){
+      _firebaseRepository.increaseActiveMember(widget.retroPageParams.roomCode);
+    }
+    oldState = state;
   }
 
   @override
@@ -70,7 +98,7 @@ class _RetroPageState extends State<RetroPage> {
                 style: TextStyle(fontSize: 20),
               ),
               flexibleSpace:
-                  appBarTitle(widget.retroPageParams.roomCode, context),
+                  appBarTitle(widget.retroPageParams.roomCode,activeMember, context),
               actions: [
                 IconButton(
                   icon: Icon(
@@ -177,36 +205,6 @@ class _RetroPageState extends State<RetroPage> {
                   );
                 },
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.green,
-                    ),
-                    alignment: Alignment.bottomRight,
-                    width: 70,
-                    height: 30,
-                    margin: EdgeInsets.only(right: 15, bottom: 2),
-                    child: Center(
-                        child: StreamBuilder(
-                      stream: _firebaseRepository
-                          .findRoomsDetail(widget.retroPageParams.roomCode),
-                      builder: (context, snapshot) {
-                        int activeMember;
-                        if (snapshot.hasData) {
-                          activeMember = snapshot.data.data()["activeMember"];
-                        } else
-                          activeMember = 0;
-                        return Text(
-                          "Active: $activeMember",
-                          style: TextStyle(color: Colors.white),
-                        );
-                      },
-                    ))),
-              ],
             ),
           ],
         ));
@@ -319,13 +317,21 @@ class _RetroPageState extends State<RetroPage> {
       );
   }
 
-  Widget appBarTitle(String code, BuildContext context) {
+  Widget appBarTitle(String code,int activeMember, BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Icon(
+              Icons.person_rounded,
+              size: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right:15.0),
+              child: Text(activeMember.toString(),style: TextStyle(fontWeight: FontWeight.bold),)
+            ),
             Text(
               code,
               style: TextStyle(fontSize: 20),
