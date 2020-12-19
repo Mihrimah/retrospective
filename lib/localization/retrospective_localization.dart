@@ -23,15 +23,17 @@ class RetrospectiveLocalization{
       'historyList':'History',
       'maxSavedDataMessage' : 'Maximum number of saved data limit exceeded',
       'save': 'Saved',
+      'gotIt': 'Got It!',
       'nocontent' : 'No content yet',
       'starfishInfo' : 'A starfish retrospective is named for its five points, where teams can articulate what to start doing, stop doing, keep doing, do more of, and do less of.',
-      'sailboatInfo' : 'A sailboat retrospective can illuminate all the things that are helping and hindering your scrum team.',
+      'sailorboatInfo' : 'A sailboat retrospective can illuminate all the things that are helping and hindering your scrum team.',
       'wrapInfo' : 'Wishes, Risks, Appreciations, Puzzles - This retrospective technique can uncover hidden concerns and helps teams examine a sprint from multiple perspectives.\nWish: What do you wish could happen?\nRisk: What are the risks?\nAppreciation: What can we appreciate?\nPuzzle: What is a current puzzle for the team?',
       'fourlsInfo' : '4Ls is a popular, frequently used technique that is simple to set up for the facilitator and easy to understand for the participants.\nLiked: What did the team really enjoy about the iteration? In particular, what went better than expected? Emphasize the positive.\nLearned: What new things did the team learn during the iteration?\nLacked: What things could the team have done better during the iteration?\nLonged For: What things did the team desire to have during the iteration that were not available?',
       'leancoffeeInfo' : 'A Lean Coffee retrospective can help your team gather and build an agenda for your team’s meeting. To do, doing, done.',
       'madsadgladInfo' : 'This retrospective template is a great way to check the emotional pulse of your agile team',
       'whatwentwellInfo' : 'What Went Well? What Didn\'t Go Well? is a basic retrospective technique that focuses on your team\'s strengths and weaknesses.',
-      'startstopcontinueInfo' : 'If you want action-oriented feedback, then this is a great format for your agile team.'
+      'startstopcontinueInfo' : 'If you want action-oriented feedback, then this is a great format for your agile team.',
+      'freeformatInfo' : 'Members of team can give comments whole emotional feelings in free format.'
     },
     'tr': {
       'title': 'Başlık',
@@ -46,16 +48,18 @@ class RetrospectiveLocalization{
       'historyList':'Geçmiş',
       'maxSavedDataMessage' : 'Maksimum kayıtlı olan oda limiti aşılamaz',
       'save': 'Kaydedildi',
+      'gotIt': 'Anladım!',
       'nocontent' : 'Henüz veri yok',
       'starfishInfo' : '5 temel konuyu ele alan Starfish methodu ile yapmaya başlanacak, devam edilecek, daha az yapılacak, daha çok yapılacak ve yapılmayacak olan aksiyonlar girilir.',
-      'sailboatInfo' : 'Ekibe yardımcı olan ve ekibi engelleyen her şey burada paylaşılır.',
+      'sailorboatInfo' : 'Ekibe yardımcı olan ve ekibi engelleyen her şey burada paylaşılır.',
       'wrapinfo' : 'Wish: Ne olmasını isterdik?\nRisk: Risklerimiz nelerdi?\nAppreciation: Neye önem vermeliydik?\nPuzzle: Takım için çözmemiz gereken sorun nedir?',
       'fourlsInfo' : 'Liked: Bu sprintte takım nelerden keyif aldı?\nLearned: Bu sprint takıma neler öğretti?\nLacked: Bu sprintte eksik olan ya da daha iyi olabilecek neler vardı?\nLonged For: Bu sprintte ne olsa daha iyi olurdu?',
       'leancoffeeInfo' : 'Yapılanlar, yapılacaklar, yapılmakta olanlar şeklinde 3 alanda yorum girebildiğimiz Lean Coffee methodu takımın hedeflerinde geldiği mevcut durumu gösterir.',
       'madsadgladInfo' : 'Takım üyelerinin duygusal olarak sprintten kızgın, üzgün, memnun oldukları konuları paylaşmalarını sağlar.',
       'whatwentwellInfo' : 'Takım içinde neyin iyi yapıldığını nelerin iyi yapılmadığını belirlemek için kullanılır.',
-      'startstopcontinueInfo' : 'Aksiyon almak için uygulanan template tipidir, başlama, bitirme ve devam etme aksiyonlarını almayı sağlar.'
-    },
+      'startstopcontinueInfo' : 'Aksiyon almak için uygulanan template tipidir, başlama, bitirme ve devam etme aksiyonlarını almayı sağlar.',
+      'freeformatInfo' : 'Takım üyeleri bu template formatında diledikleri yorumları girebilir.'
+},
   };
 
   String get save {
@@ -94,14 +98,17 @@ class RetrospectiveLocalization{
   String get copy {
     return _localizedValues[locale.languageCode]['copy'];
   }
+  String get gotIt {
+    return _localizedValues[locale.languageCode]['gotIt'];
+  }
   String get chooseTemplate {
     return _localizedValues[locale.languageCode]['chooseTemplate'];
   }
   String get starfishInfo {
     return _localizedValues[locale.languageCode]['starfishInfo'];
   }
-  String get sailboatInfo {
-    return _localizedValues[locale.languageCode]['sailboatInfo'];
+  String get sailorboatInfo {
+    return _localizedValues[locale.languageCode]['sailorboatInfo'];
   }
   String get wrapInfo {
     return _localizedValues[locale.languageCode]['wrapInfo'];
@@ -121,5 +128,7 @@ class RetrospectiveLocalization{
   String get startstopcontinueInfo {
     return _localizedValues[locale.languageCode]['startstopcontinueInfo'];
   }
-
+  String get freeformatInfo {
+    return _localizedValues[locale.languageCode]['freeformatInfo'];
+  }
 }

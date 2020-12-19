@@ -11,6 +11,7 @@ import 'package:retrospective/model/retro_page_params.dart';
 import 'package:retrospective/pages/waiting_content_page.dart';
 import 'package:retrospective/repository/firebase_repository.dart';
 import 'package:retrospective/repository/local_repository.dart';
+import 'package:retrospective/template/fourls.dart';
 
 import 'add_new_content_page.dart';
 
@@ -65,6 +66,7 @@ class _RetroPageState extends State<RetroPage> {
           preferredSize: Size.fromHeight(90),
           child: Builder(
             builder: (context) => AppBar(
+              backgroundColor: widget.retroPageParams.template.backgroundColor,
               title: Text(
                 widget.retroPageParams.template.getTemplateName(),
                 style: TextStyle(fontSize: 20),

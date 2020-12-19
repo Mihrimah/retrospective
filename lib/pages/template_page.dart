@@ -4,6 +4,7 @@ import 'package:retrospective/localization/retrospective_localization.dart';
 import 'package:retrospective/model/retro_page_params.dart';
 import 'package:retrospective/repository/firebase_repository.dart';
 import 'package:retrospective/template/abstract_base_template.dart';
+import 'package:retrospective/template/freeformat.dart';
 import 'package:retrospective/template/lean_coffee.dart';
 import 'package:retrospective/template/mad_glad_sad.dart';
 import 'package:retrospective/template/sailorboat.dart';
@@ -22,8 +23,11 @@ class TemplatePage extends StatelessWidget {
   final AbstractBaseTemplate whatWentWellTemplate = WhatWentWell();
   final AbstractBaseTemplate leanCoffeeTemplate = LeanCoffee();
   final AbstractBaseTemplate wrapTemplate = WrapTechnique();
+  final AbstractBaseTemplate freeFormat = FreeFormat();
+
   final CodeGenerator _codeGenerator = CodeGenerator();
   final FirebaseRepository _firebaseRepository = FirebaseRepository();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +38,8 @@ class TemplatePage extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           crossAxisSpacing: 20,
           mainAxisSpacing: 20,
-          crossAxisCount: 2,
+          crossAxisCount: 1,
+          childAspectRatio: 2,
           children: [
             GestureDetector(
               onTap: () {
@@ -42,7 +47,7 @@ class TemplatePage extends StatelessWidget {
               },
               child: Container(
                 color: Theme.of(context).primaryColorDark,
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(1),
                 child: madGladSadTemplate.getTemplateWidget(context),
               ),
             ),
@@ -52,7 +57,7 @@ class TemplatePage extends StatelessWidget {
               },
               child: Container(
                 color: Theme.of(context).primaryColorDark,
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(1),
                 child: starfishTemplate.getTemplateWidget(context),
               ),
             ),
@@ -62,7 +67,7 @@ class TemplatePage extends StatelessWidget {
               },
               child: Container(
                 color: Theme.of(context).primaryColorDark,
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(1),
                 child: sailorboatTemplate.getTemplateWidget(context),
               ),
             ),
@@ -72,7 +77,7 @@ class TemplatePage extends StatelessWidget {
               },
               child: Container(
                 color: Theme.of(context).primaryColorDark,
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(1),
                 child: fourLsTemplate.getTemplateWidget(context),
               ),
             ),
@@ -82,7 +87,7 @@ class TemplatePage extends StatelessWidget {
               },
               child: Container(
                 color: Theme.of(context).primaryColorDark,
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(1),
                 child: stopStartContinueTemplate.getTemplateWidget(context),
               ),
             ),
@@ -92,7 +97,7 @@ class TemplatePage extends StatelessWidget {
               },
               child: Container(
                 color: Theme.of(context).primaryColorDark,
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(1),
                 child: whatWentWellTemplate.getTemplateWidget(context),
               ),
             ),
@@ -102,7 +107,7 @@ class TemplatePage extends StatelessWidget {
               },
               child: Container(
                 color: Theme.of(context).primaryColorDark,
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(1),
                 child: leanCoffeeTemplate.getTemplateWidget(context),
               ),
             ),
@@ -112,8 +117,18 @@ class TemplatePage extends StatelessWidget {
               },
               child: Container(
                 color: Theme.of(context).primaryColorDark,
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(1),
                 child: wrapTemplate.getTemplateWidget(context),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, "/retro",arguments: RetroPageParams(freeFormat,roomCodeGenerate(freeFormat.getTemplateTypeId())));
+              },
+              child: Container(
+                color: Theme.of(context).primaryColorDark,
+                padding: const EdgeInsets.all(1),
+                child: freeFormat.getTemplateWidget(context),
               ),
             ),
           ],

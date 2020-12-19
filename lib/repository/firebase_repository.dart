@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:retrospective/template/abstract_base_template.dart';
 import 'package:retrospective/template/fourls.dart';
+import 'package:retrospective/template/freeformat.dart';
 import 'package:retrospective/template/lean_coffee.dart';
 import 'package:retrospective/template/mad_glad_sad.dart';
 import 'package:retrospective/template/sailorboat.dart';
@@ -36,6 +37,9 @@ class FirebaseRepository {
 
   final CollectionReference roomsCollection =
       FirebaseFirestore.instance.collection("rooms");
+
+  final CollectionReference freeformatCollection =
+  FirebaseFirestore.instance.collection("freeformat");
 
   Stream<QuerySnapshot> findMadsadgladByRoomCode(String roomCode) {
     return madsadgladCollection
@@ -85,6 +89,12 @@ class FirebaseRepository {
     return wrapCollection.where("roomCode", isEqualTo: roomCode).snapshots();
   }
 
+  Stream<QuerySnapshot> findFreeformatByRoomCode(String roomCode) {
+    return freeformatCollection
+        .where("roomCode", isEqualTo: roomCode)
+        .snapshots();
+  }
+
   Stream<QuerySnapshot> getRoomDataStream(String roomCode, int templateId) {
     Stream<QuerySnapshot> roomDataStream;
     if (templateId == 1) {
@@ -103,6 +113,8 @@ class FirebaseRepository {
       roomDataStream = findLeancoffeeRoomCode(roomCode);
     } else if (templateId == 8) {
       roomDataStream = findWrapRoomCode(roomCode);
+    } else if (templateId == 9) {
+      roomDataStream = findFreeformatByRoomCode(roomCode);
     } else
       roomDataStream = null;
     return roomDataStream;
@@ -134,6 +146,8 @@ class FirebaseRepository {
       await leancoffeeCollection.add(item);
     } else if (template is WrapTechnique) {
       await wrapCollection.add(item);
+    } else if (template is FreeFormat) {
+      await freeformatCollection.add(item);
     } else {
       throw new Exception("There is no template collection");
     }
