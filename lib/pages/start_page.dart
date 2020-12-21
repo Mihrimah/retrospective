@@ -62,13 +62,9 @@ class _StartPageState extends State<StartPage>
                           );
                         },
                       )),
-                      Center(
-                        child: Switch(
-                          value: themeProvider.isLightTheme,
-                          onChanged: (val) {
-                            themeProvider.setThemeData = val;
-                          },
-                        ),
+                      SizedBox(
+                        height: 30,
+                        width: double.infinity,
                       ),
                       SizedBox(
                         height: 60,
@@ -152,6 +148,18 @@ class _StartPageState extends State<StartPage>
                             style: Theme.of(context).textTheme.headline6,
                           ),
                         ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.wb_sunny),
+                          Switch(
+                            value: themeProvider.isLightTheme,
+                            onChanged: (val) {
+                              themeProvider.setThemeData = val;
+                            },
+                          ),
+                        ],
                       ),
                     ],
                   ),
