@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:retrospective/core/code_generator.dart';
+import 'package:retrospective/core/grid_block.dart';
 import 'package:retrospective/localization/retrospective_localization.dart';
 import 'package:retrospective/model/retro_page_params.dart';
 import 'package:retrospective/repository/firebase_repository.dart';
@@ -39,7 +40,7 @@ class TemplatePage extends StatelessWidget {
           crossAxisSpacing: 20,
           mainAxisSpacing: 20,
           crossAxisCount: 2,
-          childAspectRatio: 2,
+          childAspectRatio: 1,
           children: [
             GestureDetector(
               onTap: () {
@@ -49,13 +50,7 @@ class TemplatePage extends StatelessWidget {
                         roomCodeGenerate(
                             madGladSadTemplate.getTemplateTypeId())));
               },
-              child: Container(
-                padding: const EdgeInsets.all(1),
-                child: madGladSadTemplate.getTemplateWidget(context),
-                decoration: new BoxDecoration(
-                    color: Color(0xFF195E83),
-                    borderRadius: new BorderRadius.all(Radius.circular(15.0))),
-              ),
+              child: madGladSadTemplate.getTemplateWidget(context),
             ),
             GestureDetector(
               onTap: () {
@@ -65,13 +60,7 @@ class TemplatePage extends StatelessWidget {
                         roomCodeGenerate(
                             starfishTemplate.getTemplateTypeId())));
               },
-              child: Container(
-                padding: const EdgeInsets.all(1),
-                child: starfishTemplate.getTemplateWidget(context),
-                decoration: new BoxDecoration(
-                    color: Color(0xFF195E83),
-                    borderRadius: new BorderRadius.all(Radius.circular(15.0))),
-              ),
+              child: starfishTemplate.getTemplateWidget(context),
             ),
             GestureDetector(
               onTap: () {
@@ -81,13 +70,7 @@ class TemplatePage extends StatelessWidget {
                         roomCodeGenerate(
                             sailorboatTemplate.getTemplateTypeId())));
               },
-              child: Container(
-                padding: const EdgeInsets.all(1),
-                child: sailorboatTemplate.getTemplateWidget(context),
-                decoration: new BoxDecoration(
-                    color: Color(0xFF195E83),
-                    borderRadius: new BorderRadius.all(Radius.circular(15.0))),
-              ),
+              child: sailorboatTemplate.getTemplateWidget(context),
             ),
             GestureDetector(
               onTap: () {
@@ -95,13 +78,7 @@ class TemplatePage extends StatelessWidget {
                     arguments: RetroPageParams(fourLsTemplate,
                         roomCodeGenerate(fourLsTemplate.getTemplateTypeId())));
               },
-              child: Container(
-                padding: const EdgeInsets.all(1),
-                child: fourLsTemplate.getTemplateWidget(context),
-                decoration: new BoxDecoration(
-                    color: Color(0xFF195E83),
-                    borderRadius: new BorderRadius.all(Radius.circular(15.0))),
-              ),
+              child: fourLsTemplate.getTemplateWidget(context),
             ),
             GestureDetector(
               onTap: () {
@@ -111,13 +88,7 @@ class TemplatePage extends StatelessWidget {
                         roomCodeGenerate(
                             stopStartContinueTemplate.getTemplateTypeId())));
               },
-              child: Container(
-                padding: const EdgeInsets.all(1),
-                child: stopStartContinueTemplate.getTemplateWidget(context),
-                decoration: new BoxDecoration(
-                    color: Color(0xFF195E83),
-                    borderRadius: new BorderRadius.all(Radius.circular(15.0))),
-              ),
+              child: stopStartContinueTemplate.getTemplateWidget(context),
             ),
             GestureDetector(
               onTap: () {
@@ -127,13 +98,7 @@ class TemplatePage extends StatelessWidget {
                         roomCodeGenerate(
                             whatWentWellTemplate.getTemplateTypeId())));
               },
-              child: Container(
-                padding: const EdgeInsets.all(1),
-                child: whatWentWellTemplate.getTemplateWidget(context),
-                decoration: new BoxDecoration(
-                    color: Color(0xFF195E83),
-                    borderRadius: new BorderRadius.all(Radius.circular(15.0))),
-              ),
+              child: whatWentWellTemplate.getTemplateWidget(context),
             ),
             GestureDetector(
               onTap: () {
@@ -143,13 +108,7 @@ class TemplatePage extends StatelessWidget {
                         roomCodeGenerate(
                             leanCoffeeTemplate.getTemplateTypeId())));
               },
-              child: Container(
-                padding: const EdgeInsets.all(1),
-                child: leanCoffeeTemplate.getTemplateWidget(context),
-                decoration: new BoxDecoration(
-                    color: Color(0xFF195E83),
-                    borderRadius: new BorderRadius.all(Radius.circular(15.0))),
-              ),
+              child: leanCoffeeTemplate.getTemplateWidget(context),
             ),
             GestureDetector(
               onTap: () {
@@ -157,13 +116,7 @@ class TemplatePage extends StatelessWidget {
                     arguments: RetroPageParams(wrapTemplate,
                         roomCodeGenerate(wrapTemplate.getTemplateTypeId())));
               },
-              child: Container(
-                padding: const EdgeInsets.all(1),
-                child: wrapTemplate.getTemplateWidget(context),
-                decoration: new BoxDecoration(
-                    color: Color(0xFF195E83),
-                    borderRadius: new BorderRadius.all(Radius.circular(15.0))),
-              ),
+              child: wrapTemplate.getTemplateWidget(context),
             ),
             GestureDetector(
               onTap: () {
@@ -171,13 +124,7 @@ class TemplatePage extends StatelessWidget {
                     arguments: RetroPageParams(freeFormat,
                         roomCodeGenerate(freeFormat.getTemplateTypeId())));
               },
-              child: Container(
-                padding: const EdgeInsets.all(1),
-                child: freeFormat.getTemplateWidget(context),
-                decoration: new BoxDecoration(
-                    color: Color(0xFF195E83),
-                    borderRadius: new BorderRadius.all(Radius.circular(15.0))),
-              ),
+              child: freeFormat.getTemplateWidget(context),
             ),
           ],
         ));

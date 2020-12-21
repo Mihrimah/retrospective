@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:retrospective/core/grid_block.dart';
+import 'package:retrospective/localization/retrospective_localization.dart';
 import 'package:retrospective/template/abstract_base_template.dart';
 
 class WrapTechnique extends AbstractBaseTemplate {
@@ -10,4 +12,14 @@ class WrapTechnique extends AbstractBaseTemplate {
 
   WrapTechnique()
       : super(name: templateName, titles: templateTitles, type: templateType, backgroundColor: backgroundC, backgroundImage: backgroundI);
+
+  @override
+  Widget getTemplateWidget(BuildContext context) {
+    return GridBlock(
+      title: templateName,
+      description: templateTitles,
+      infoTitle: templateName,
+      infoMessage: RetrospectiveLocalization.of(context).wrapInfo,
+    );
+  }
 }
