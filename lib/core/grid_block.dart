@@ -59,6 +59,7 @@ class GridBlock extends StatelessWidget {
                   ],
                 ),
               ),
+              Divider(color: Colors.white,height: 3,thickness: 2,),
               Row(
                 children: [
                   Padding(
