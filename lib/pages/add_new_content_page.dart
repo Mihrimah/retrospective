@@ -36,7 +36,6 @@ class _AddNewContentPageState extends State<AddNewContentPage> {
     //final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: widget._retroPageParams.template.backgroundColor,
             title: Text(
               widget._retroPageParams.template.name,
               style: TextStyle(fontSize: 20),

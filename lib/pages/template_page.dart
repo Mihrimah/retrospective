@@ -38,104 +38,153 @@ class TemplatePage extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           crossAxisSpacing: 20,
           mainAxisSpacing: 20,
-          crossAxisCount: 1,
+          crossAxisCount: 2,
           childAspectRatio: 2,
           children: [
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, "/retro",arguments: RetroPageParams(madGladSadTemplate,roomCodeGenerate(madGladSadTemplate.getTemplateTypeId())));
+                Navigator.pushNamed(context, "/retro",
+                    arguments: RetroPageParams(
+                        madGladSadTemplate,
+                        roomCodeGenerate(
+                            madGladSadTemplate.getTemplateTypeId())));
               },
               child: Container(
-                color: Theme.of(context).primaryColorDark,
                 padding: const EdgeInsets.all(1),
                 child: madGladSadTemplate.getTemplateWidget(context),
+                decoration: new BoxDecoration(
+                    color: Color(0xFF195E83),
+                    borderRadius: new BorderRadius.all(Radius.circular(15.0))),
               ),
             ),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, "/retro",arguments: RetroPageParams(starfishTemplate,roomCodeGenerate(starfishTemplate.getTemplateTypeId())));
+                Navigator.pushNamed(context, "/retro",
+                    arguments: RetroPageParams(
+                        starfishTemplate,
+                        roomCodeGenerate(
+                            starfishTemplate.getTemplateTypeId())));
               },
               child: Container(
-                color: Theme.of(context).primaryColorDark,
                 padding: const EdgeInsets.all(1),
                 child: starfishTemplate.getTemplateWidget(context),
+                decoration: new BoxDecoration(
+                    color: Color(0xFF195E83),
+                    borderRadius: new BorderRadius.all(Radius.circular(15.0))),
               ),
             ),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, "/retro",arguments: RetroPageParams(sailorboatTemplate,roomCodeGenerate(sailorboatTemplate.getTemplateTypeId())));
+                Navigator.pushNamed(context, "/retro",
+                    arguments: RetroPageParams(
+                        sailorboatTemplate,
+                        roomCodeGenerate(
+                            sailorboatTemplate.getTemplateTypeId())));
               },
               child: Container(
-                color: Theme.of(context).primaryColorDark,
                 padding: const EdgeInsets.all(1),
                 child: sailorboatTemplate.getTemplateWidget(context),
+                decoration: new BoxDecoration(
+                    color: Color(0xFF195E83),
+                    borderRadius: new BorderRadius.all(Radius.circular(15.0))),
               ),
             ),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, "/retro",arguments: RetroPageParams(fourLsTemplate,roomCodeGenerate(fourLsTemplate.getTemplateTypeId())));
+                Navigator.pushNamed(context, "/retro",
+                    arguments: RetroPageParams(fourLsTemplate,
+                        roomCodeGenerate(fourLsTemplate.getTemplateTypeId())));
               },
               child: Container(
-                color: Theme.of(context).primaryColorDark,
                 padding: const EdgeInsets.all(1),
                 child: fourLsTemplate.getTemplateWidget(context),
+                decoration: new BoxDecoration(
+                    color: Color(0xFF195E83),
+                    borderRadius: new BorderRadius.all(Radius.circular(15.0))),
               ),
             ),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, "/retro",arguments: RetroPageParams(stopStartContinueTemplate,roomCodeGenerate(stopStartContinueTemplate.getTemplateTypeId())));
+                Navigator.pushNamed(context, "/retro",
+                    arguments: RetroPageParams(
+                        stopStartContinueTemplate,
+                        roomCodeGenerate(
+                            stopStartContinueTemplate.getTemplateTypeId())));
               },
               child: Container(
-                color: Theme.of(context).primaryColorDark,
                 padding: const EdgeInsets.all(1),
                 child: stopStartContinueTemplate.getTemplateWidget(context),
+                decoration: new BoxDecoration(
+                    color: Color(0xFF195E83),
+                    borderRadius: new BorderRadius.all(Radius.circular(15.0))),
               ),
             ),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, "/retro",arguments: RetroPageParams(whatWentWellTemplate,roomCodeGenerate(whatWentWellTemplate.getTemplateTypeId())));
+                Navigator.pushNamed(context, "/retro",
+                    arguments: RetroPageParams(
+                        whatWentWellTemplate,
+                        roomCodeGenerate(
+                            whatWentWellTemplate.getTemplateTypeId())));
               },
               child: Container(
-                color: Theme.of(context).primaryColorDark,
                 padding: const EdgeInsets.all(1),
                 child: whatWentWellTemplate.getTemplateWidget(context),
+                decoration: new BoxDecoration(
+                    color: Color(0xFF195E83),
+                    borderRadius: new BorderRadius.all(Radius.circular(15.0))),
               ),
             ),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, "/retro",arguments: RetroPageParams(leanCoffeeTemplate,roomCodeGenerate(leanCoffeeTemplate.getTemplateTypeId())));
+                Navigator.pushNamed(context, "/retro",
+                    arguments: RetroPageParams(
+                        leanCoffeeTemplate,
+                        roomCodeGenerate(
+                            leanCoffeeTemplate.getTemplateTypeId())));
               },
               child: Container(
-                color: Theme.of(context).primaryColorDark,
                 padding: const EdgeInsets.all(1),
                 child: leanCoffeeTemplate.getTemplateWidget(context),
+                decoration: new BoxDecoration(
+                    color: Color(0xFF195E83),
+                    borderRadius: new BorderRadius.all(Radius.circular(15.0))),
               ),
             ),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, "/retro",arguments: RetroPageParams(wrapTemplate,roomCodeGenerate(wrapTemplate.getTemplateTypeId())));
+                Navigator.pushNamed(context, "/retro",
+                    arguments: RetroPageParams(wrapTemplate,
+                        roomCodeGenerate(wrapTemplate.getTemplateTypeId())));
               },
               child: Container(
-                color: Theme.of(context).primaryColorDark,
                 padding: const EdgeInsets.all(1),
                 child: wrapTemplate.getTemplateWidget(context),
+                decoration: new BoxDecoration(
+                    color: Color(0xFF195E83),
+                    borderRadius: new BorderRadius.all(Radius.circular(15.0))),
               ),
             ),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, "/retro",arguments: RetroPageParams(freeFormat,roomCodeGenerate(freeFormat.getTemplateTypeId())));
+                Navigator.pushNamed(context, "/retro",
+                    arguments: RetroPageParams(freeFormat,
+                        roomCodeGenerate(freeFormat.getTemplateTypeId())));
               },
               child: Container(
-                color: Theme.of(context).primaryColorDark,
                 padding: const EdgeInsets.all(1),
                 child: freeFormat.getTemplateWidget(context),
+                decoration: new BoxDecoration(
+                    color: Color(0xFF195E83),
+                    borderRadius: new BorderRadius.all(Radius.circular(15.0))),
               ),
             ),
           ],
         ));
   }
-  String roomCodeGenerate(int templateId){
-     String roomCode = _codeGenerator.generateRoomCode(templateId);
+
+  String roomCodeGenerate(int templateId) {
+    String roomCode = _codeGenerator.generateRoomCode(templateId);
     _firebaseRepository.createRoomDetail(roomCode, templateId);
     return roomCode;
   }

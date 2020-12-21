@@ -92,7 +92,6 @@ class _RetroPageState extends State<RetroPage> with WidgetsBindingObserver {
           preferredSize: Size.fromHeight(90),
           child: Builder(
             builder: (context) => AppBar(
-              backgroundColor: widget.retroPageParams.template.backgroundColor,
               title: Text(
                 widget.retroPageParams.template.getTemplateName(),
                 style: TextStyle(fontSize: 20),
