@@ -11,25 +11,27 @@ class RetrospectiveLocalization{
 
   static Map<String, Map<String, String>> _localizedValues = {
     'es': {
-      'title': 'título',
-      'roomCode' : 'código de habitación',
-      'createRoom' : 'crear código',
-      'joinRoom' : 'unirse a la habitación',
+      'title': 'Título',
+      'roomCode' : 'Código de habitación',
+      'createRoom' : 'Crear código',
+      'retrospectiveExp' : 'Retrospectivas especiales que promueven la mejora continua',
+      'joinRoom' : 'Unirse a la habitación',
       'theme' : 'Tema',
-      'addContent' : 'agregar contenido',
-      'add' : 'añadir',
-      'copy' : 'copiada',
-      'chooseTemplate' : 'elegir la plantilla',
-      'historyList':'lista de historia',
+      'addContent' : 'Agregar contenido',
+      'add' : 'Añadir',
+      'copy' : 'Copiada',
+      'chooseTemplate' : 'Elegir la plantilla',
+      'historyList': 'Lista de historia',
       'maxSavedDataMessage' : 'Se superó el número máximo de límite de datos guardados',
-      'save': 'salvado',
+      'save': 'Salvado',
       'gotIt': 'Entendido!',
-      'send' : 'senden',
-      'sendMail' : 'enviar correo',
-      'emailAddress' : 'introduzca la dirección de correo electrónico',
+      'send' : 'Senden',
+      'sendMail' : 'Enviar correo',
+      'emailAddress' : 'Introduzca la dirección de correo electrónico',
       'successEmailRequest' : 'El correo ha sido enviado',
       'failEmailRequest' : 'No se ha enviado el correo, Error:',
-      'nocontent' : 'sin contenido todavía',
+      'nocontent' : 'Sin contenido todavía',
+      'shareCode' : 'Compartir el código',
       'starfishInfo' : 'Una retrospectiva de estrellas de mar se llama así por sus cinco puntos, donde los equipos pueden articular qué comenzar a hacer, dejar de hacer, seguir haciendo, hacer más y hacer menos.',
       'sailorboatInfo' : 'Una retrospectiva de un velero puede iluminar todas las cosas que están ayudando y obstaculizando a su equipo de scrum.',
       'wrapInfo' : 'Deseos, riesgos, apreciaciones, acertijos: esta técnica retrospectiva puede descubrir preocupaciones ocultas y ayuda a los equipos a examinar un sprint desde múltiples perspectivas. \n\n Deseo: ¿Qué desearías que sucediera? \n Riesgo: ¿Cuáles son los riesgos? \n Apreciación: ¿Qué podemos apreciar? \n Rompecabezas: ¿Qué es un rompecabezas actual para el equipo?',
@@ -44,22 +46,24 @@ class RetrospectiveLocalization{
       'title': 'Titel',
       'roomCode' : 'Zimmercode',
       'createRoom' : 'Platz schaffen',
+      'retrospectiveExp' : 'Engagierte retrospektiven, die kontinuierliche Verbesserung fördern',
       'joinRoom' : 'Raum betreten',
       'theme' : 'Thema',
       'addContent' : 'Inhalt Hinzufügen',
       'add' : 'Hinzufügen',
-      'copy' : 'kopiert',
+      'copy' : 'Kopiert',
       'chooseTemplate' : 'Vorlage wählen',
       'historyList':'Verlaufsliste',
       'maxSavedDataMessage' : 'Maximale Anzahl gespeicherter Daten überschritten',
       'save': 'Gerettet',
       'gotIt': 'Ich habs!',
-      'send' : 'senden',
+      'send' : 'Senden',
       'sendMail' : 'Mail senden',
       'emailAddress' : 'E-Mail Adresse eingeben',
       'successEmailRequest' : 'Mail wurde gesendet',
       'failEmailRequest' : 'Mail wurde nicht gesendet, Fehler:',
       'nocontent' : 'Noch kein Inhalt',
+      'shareCode' : 'Teilen code',
       'starfishInfo' : 'Eine Seestern-Retrospektive ist nach ihren fünf Punkten benannt, in denen Teams artikulieren können, was zu tun ist, aufzuhören, weiter zu tun, mehr zu tun und weniger zu tun.',
       'sailorboatInfo' : 'Eine Segelboot-Retrospektive kann alle Dinge beleuchten, die Ihrem Scrum-Team helfen und es behindern.',
       'wrapInfo' : 'Wünsche, Risiken, Wertschätzungen, Rätsel - Diese retrospektive Technik kann versteckte Bedenken aufdecken und Teams dabei helfen, einen Sprint aus verschiedenen Perspektiven zu untersuchen wir schätzen? \n Puzzle: Was ist ein aktuelles Puzzle für das Team?',
@@ -74,11 +78,12 @@ class RetrospectiveLocalization{
       'title': 'Hello World',
       'roomCode' : 'Room Code',
       'createRoom' : 'Create Room',
+      'retrospectiveExp' : 'Engaging retrospectives that fuel continuous improvement',
       'joinRoom' : 'Join Room',
       'theme' : 'Theme',
       'addContent' : 'Add Content',
       'add' : 'Add',
-      'copy' : 'copied',
+      'copy' : 'Copied',
       'chooseTemplate' : 'Choose Template',
       'historyList':'History',
       'maxSavedDataMessage' : 'Maximum number of saved data limit exceeded',
@@ -90,6 +95,7 @@ class RetrospectiveLocalization{
       'successEmailRequest' : 'Mail has been sent',
       'failEmailRequest' : 'Mail has not been sent, Error :',
       'nocontent' : 'No content yet',
+      'shareCode' : 'Share Code',
       'starfishInfo' : 'A starfish retrospective is named for its five points, where teams can articulate what to start doing, stop doing, keep doing, do more of, and do less of.',
       'sailorboatInfo' : 'A sailboat retrospective can illuminate all the things that are helping and hindering your scrum team.',
       'wrapInfo' : 'Wishes, Risks, Appreciations, Puzzles - This retrospective technique can uncover hidden concerns and helps teams examine a sprint from multiple perspectives.\n\nWish: What do you wish could happen?\nRisk: What are the risks?\nAppreciation: What can we appreciate?\nPuzzle: What is a current puzzle for the team?',
@@ -104,13 +110,14 @@ class RetrospectiveLocalization{
       'title': 'Başlık',
       'roomCode' : 'Oda Kod',
       'createRoom' : 'Oda Oluştur',
+      'retrospectiveExp' : 'Sürekli iyileştirmeyi teşvik eden özel retrospektifler',
       'joinRoom' : 'Odaya Gir',
       'theme' : 'Tema',
       'addContent' : 'İçerik Gir',
       'add' : 'Ekle',
       'copy' : 'Kopyalandı',
       'chooseTemplate' : 'Şablon Seç',
-      'historyList':'Geçmiş',
+      'historyList': 'Geçmiş',
       'maxSavedDataMessage' : 'Maksimum kayıtlı olan oda limiti aşılamaz',
       'save': 'Kaydedildi',
       'gotIt': 'Anladım!',
@@ -120,6 +127,7 @@ class RetrospectiveLocalization{
       'successEmailRequest' : 'Mail gönderildi',
       'failEmailRequest' : 'Mail gönderilemedi, Hata :',
       'nocontent' : 'Henüz veri yok',
+      'shareCode' : 'Kodu Paylaş',
       'starfishInfo' : '5 temel konuyu ele alan Starfish methodu ile yapmaya başlanacak, devam edilecek, daha az yapılacak, daha çok yapılacak ve yapılmayacak olan aksiyonlar girilir.',
       'sailorboatInfo' : 'Ekibe yardımcı olan ve ekibi engelleyen her şey burada paylaşılır.',
       'wrapinfo' : 'Wish: Ne olmasını isterdik?\nRisk: Risklerimiz nelerdi?\nAppreciation: Neye önem vermeliydik?\nPuzzle: Takım için çözmemiz gereken sorun nedir?',
@@ -152,6 +160,9 @@ class RetrospectiveLocalization{
   String get nocontent {
     return _localizedValues[locale.languageCode]['nocontent'];
   }
+  String get shareCode {
+    return _localizedValues[locale.languageCode]['shareCode'];
+  }
   String get maxSavedDataMessage {
     return _localizedValues[locale.languageCode]['maxSavedDataMessage'];
   }
@@ -163,6 +174,9 @@ class RetrospectiveLocalization{
   }
   String get createRoom {
     return _localizedValues[locale.languageCode]['createRoom'];
+  }
+  String get retrospectiveExp {
+    return _localizedValues[locale.languageCode]['retrospectiveExp'];
   }
   String get joinRoom {
     return _localizedValues[locale.languageCode]['joinRoom'];

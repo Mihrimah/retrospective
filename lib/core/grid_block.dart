@@ -39,6 +39,9 @@ class GridBlock extends StatelessWidget {
                               builder: (BuildContext context) {
                                 return AlertDialog(
                                   title: Text(infoTitle),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(20.0))
+                                  ),
                                   content: Text(infoMessage),
                                   actions: <Widget>[
                                     FlatButton(

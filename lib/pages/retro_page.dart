@@ -97,7 +97,7 @@ class _RetroPageState extends State<RetroPage> with WidgetsBindingObserver {
                 style: TextStyle(fontSize: 20),
               ),
               flexibleSpace:
-                  appBarTitle(widget.retroPageParams.roomCode,activeMember, context),
+                  appBarTitle(RetrospectiveLocalization.of(context).shareCode,activeMember, context),
               actions: [
                 IconButton(
                   icon: Icon(

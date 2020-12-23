@@ -63,8 +63,11 @@ class _StartPageState extends State<StartPage>
                         },
                       )),
                       SizedBox(
-                        height: 30,
+                        height: 36,
                         width: double.infinity,
+                        child: Text(
+                            RetrospectiveLocalization.of(context).retrospectiveExp,
+                            style: Theme.of(context).textTheme.bodyText1),
                       ),
                       SizedBox(
                         height: 60,
