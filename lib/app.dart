@@ -23,6 +23,7 @@ class App extends StatelessWidget {
     final themeProvider = Provider.of<ThemeProvider>(context);
     return MaterialApp(
       initialRoute: '/start',
+      debugShowCheckedModeBanner: false,
       routes: routes,
       theme: themeProvider.getThemeData,
       home: StartPage(),
@@ -35,7 +36,11 @@ class App extends StatelessWidget {
       ],
       supportedLocales: [
         const Locale('en', 'US'),
-        const Locale('tr', 'TR')
+        const Locale('tr', 'TR'),
+        const Locale('de', 'DE'),
+        const Locale('es', 'ES'),
+        const Locale('it', 'IT'),
+        const Locale('fr', 'FR'),
       ],
     );
   }

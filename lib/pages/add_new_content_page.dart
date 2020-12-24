@@ -35,6 +35,12 @@ class _AddNewContentPageState extends State<AddNewContentPage> {
   Widget build(BuildContext context) {
     //final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
+      appBar: AppBar(
+            title: Text(
+              widget._retroPageParams.template.name,
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
       body: Center(
         child: Container(
           child: Column(

@@ -1,10 +1,10 @@
+import 'dart:async';
 import 'dart:collection';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:retrospective/core/grouped_list_view.dart';
 import 'package:retrospective/localization/retrospective_localization.dart';
 import 'package:retrospective/model/retro_data_model.dart';
@@ -12,7 +12,7 @@ import 'package:retrospective/model/retro_page_params.dart';
 import 'package:retrospective/pages/waiting_content_page.dart';
 import 'package:retrospective/repository/firebase_repository.dart';
 import 'package:retrospective/repository/local_repository.dart';
-
+import 'package:retrospective/core/mailer.dart' as Mail;
 import 'add_new_content_page.dart';
 
 class RetroPage extends StatefulWidget {
@@ -24,13 +24,18 @@ class RetroPage extends StatefulWidget {
   _RetroPageState createState() => _RetroPageState();
 }
 
-class _RetroPageState extends State<RetroPage> {
+class _RetroPageState extends State<RetroPage> with WidgetsBindingObserver {
   final FirebaseRepository _firebaseRepository = FirebaseRepository();
   LocalRepository _localRepository;
   Set likedRowsSet = new HashSet();
   int givenLikeCount = 0;
   List<RetroDataModel> list;
   int savedRecordlen = 0;
+  TextEditingController _textEditingController = TextEditingController();
+  bool isEnabled = false;
+  int activeMember = 0;
+  AppLifecycleState oldState;
+
   final snackBar = SnackBar(
     content: Text('Copied!'),
     duration: Duration(seconds: 1),
@@ -38,11 +43,46 @@ class _RetroPageState extends State<RetroPage> {
 
   @override
   void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _localRepository = LocalRepository();
     _localRepository
         .getNumberOfSavedRecord()
         .then((value) => savedRecordlen = value);
-    super.initState();
+    print("init state retro page");
+    _firebaseRepository.increaseActiveMember(widget.retroPageParams.roomCode);
+    _firebaseRepository
+        .findRoomsDetail(widget.retroPageParams.roomCode)
+        .listen((event) {
+      setState(() {
+        activeMember = event.data()["activeMember"];
+      });
+    });
+    oldState = AppLifecycleState.resumed;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+    _firebaseRepository.decreaseActiveMember(widget.retroPageParams.roomCode);
+    print("dispose ran retro page");
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    print("state : " + state.toString());
+    if ((state == AppLifecycleState.inactive ||
+            state == AppLifecycleState.detached ||
+            state == AppLifecycleState.paused) &&
+        oldState == AppLifecycleState.resumed) {
+      _firebaseRepository.decreaseActiveMember(widget.retroPageParams.roomCode);
+      print("didChangeAppLifecycleState ran retro page");
+    } else if (state == AppLifecycleState.resumed) {
+      _firebaseRepository.increaseActiveMember(widget.retroPageParams.roomCode);
+    }
+    oldState = state;
   }
 
   @override
@@ -56,26 +96,81 @@ class _RetroPageState extends State<RetroPage> {
                 widget.retroPageParams.template.getTemplateName(),
                 style: TextStyle(fontSize: 20),
               ),
-              flexibleSpace:
-                  appBarTitle(widget.retroPageParams.roomCode, context),
+              flexibleSpace: appBarTitle(
+                  RetrospectiveLocalization.of(context).shareCode,
+                  activeMember,
+                  context),
               actions: [
+                IconButton(
+                  icon: Icon(
+                    Icons.mail,
+                    size: 30,
+                  ),
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext ctx) {
+                        // return object of type Dialog
+                        return AlertDialog(
+                          title: new Text(
+                              RetrospectiveLocalization.of(context).sendMail),
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0))),
+                          content: TextFormField(
+                            decoration: InputDecoration(
+                              hintText: RetrospectiveLocalization.of(context)
+                                  .emailAddress,
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).accentColor),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).accentColor),
+                              ),
+                            ),
+                            controller: _textEditingController,
+                          ),
+                          actions: <Widget>[
+                            // usually buttons at the bottom of the dialog
+                            new FlatButton(
+                                child: new Text(
+                                    RetrospectiveLocalization.of(context).send,
+                                    style:
+                                        Theme.of(context).textTheme.headline6),
+                                onPressed: () {
+                                  if (_textEditingController.value.text !=
+                                          null &&
+                                      _textEditingController.value.text != '')
+                                    sendMail(context,
+                                        _textEditingController.value.text);
+                                  Navigator.of(context).pop();
+                                }),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                ),
                 IconButton(
                   icon: Icon(
                     Icons.save,
                     size: 30,
                   ),
                   onPressed: () {
-                    if (savedRecordlen < 5){
+                    if (savedRecordlen < 5) {
                       _localRepository.addRoomDataToStorage(
                           widget.retroPageParams.roomCode, list);
-                    Scaffold.of(context).showSnackBar(SnackBar(
-                      content: Text(RetrospectiveLocalization.of(context).save),
-                      duration: Duration(seconds: 2),
-                    ));
-                    }
-                    else
                       Scaffold.of(context).showSnackBar(SnackBar(
-                        content: Text(RetrospectiveLocalization.of(context).maxSavedDataMessage),
+                        content:
+                            Text(RetrospectiveLocalization.of(context).save),
+                        duration: Duration(seconds: 2),
+                      ));
+                    } else
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                        content: Text(RetrospectiveLocalization.of(context)
+                            .maxSavedDataMessage),
                         duration: Duration(seconds: 2),
                       ));
                   },
@@ -97,23 +192,54 @@ class _RetroPageState extends State<RetroPage> {
           },
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-        body: StreamBuilder(
-          stream: getRoomDataStream(),
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) return buildWaitingScreen();
-            if (snapshot.data.documents.length == 0)
-              return WaitingContentPage();
-            list = RetroDataModel.toBuilder(snapshot);
-            return GroupedListView(
-              groupBy: (RetroDataModel t) => t.templateTitle,
-              groupBuilder: (BuildContext context, String title) =>
-                  _listGroupedHeaderWidget(title),
-              listBuilder: (BuildContext context, RetroDataModel t) =>
-                  _listRowWidget(t),
-              list: list,
-            );
-          },
+        body: Column(
+          children: [
+            Expanded(
+              child: StreamBuilder(
+                stream: getRoomDataStream(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) return buildWaitingScreen();
+                  if (snapshot.data.documents.length == 0)
+                    return WaitingContentPage();
+                  list = RetroDataModel.toBuilder(snapshot);
+                  return GroupedListView(
+                    groupBy: (RetroDataModel t) => t.templateTitle,
+                    groupBuilder: (BuildContext context, String title) =>
+                        _listGroupedHeaderWidget(title),
+                    listBuilder: (BuildContext context, RetroDataModel t) =>
+                        _listRowWidget(t),
+                    list: list,
+                  );
+                },
+              ),
+            ),
+          ],
         ));
+  }
+
+  sendMail(BuildContext context, String toAddress) async {
+    Mail.Mailer m = Mail.Mailer(list: list, toAddress: toAddress);
+    try {
+      if (list == null || list.isEmpty) throw new NoListFoundException();
+
+      await m.sendMail();
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content:
+            Text(RetrospectiveLocalization.of(context).successEmailRequest),
+        duration: Duration(seconds: 2),
+      ));
+    } on NoListFoundException {
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text(RetrospectiveLocalization.of(context).noListFound),
+        duration: Duration(seconds: 2),
+      ));
+    } catch (e) {
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text(RetrospectiveLocalization.of(context).failEmailRequest +
+            e.toString()),
+        duration: Duration(seconds: 2),
+      ));
+    }
   }
 
   Stream getRoomDataStream() {
@@ -207,13 +333,23 @@ class _RetroPageState extends State<RetroPage> {
       );
   }
 
-  Widget appBarTitle(String code, BuildContext context) {
+  Widget appBarTitle(String code, int activeMember, BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Icon(
+              Icons.person_rounded,
+              size: 20,
+            ),
+            Padding(
+                padding: const EdgeInsets.only(right: 15.0),
+                child: Text(
+                  activeMember.toString(),
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                )),
             Text(
               code,
               style: TextStyle(fontSize: 20),
@@ -244,3 +380,5 @@ class _RetroPageState extends State<RetroPage> {
     );
   }
 }
+
+class NoListFoundException implements Exception {}

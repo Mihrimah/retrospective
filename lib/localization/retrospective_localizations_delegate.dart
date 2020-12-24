@@ -6,7 +6,7 @@ class RetrospectiveLocalizationsDelegate extends LocalizationsDelegate<Retrospec
   const RetrospectiveLocalizationsDelegate();
 
   @override
-  bool isSupported(Locale locale) => ['en', 'tr'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => ['en', 'tr', 'de', 'es', 'it', 'fr'].contains(locale.languageCode);
 
   @override
   Future<RetrospectiveLocalization> load(Locale locale) {

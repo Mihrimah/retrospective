@@ -3,6 +3,7 @@ import 'package:retrospective/localization/retrospective_localization.dart';
 import 'package:retrospective/model/retro_page_params.dart';
 import 'package:retrospective/template/abstract_base_template.dart';
 import 'package:retrospective/template/fourls.dart';
+import 'package:retrospective/template/freeformat.dart';
 import 'package:retrospective/template/lean_coffee.dart';
 import 'package:retrospective/template/mad_glad_sad.dart';
 import 'package:retrospective/template/sailorboat.dart';
@@ -18,17 +19,21 @@ class StartPage extends StatefulWidget {
   _StartPageState createState() => _StartPageState();
 }
 
-class _StartPageState extends State<StartPage> {
-  String code;
+class _StartPageState extends State<StartPage>
+    with SingleTickerProviderStateMixin {
   TextEditingController _textEditingController = TextEditingController();
   bool isEnabled = false;
+  AnimationController _controller;
+  Animation _animation;
 
   @override
   Widget build(BuildContext context) {
+    if(_controller.isCompleted) _controller.reset();
+    _controller.forward();
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       body: Center(
-        child: Container(
+        child: SingleChildScrollView(
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -39,17 +44,39 @@ class _StartPageState extends State<StartPage> {
                   child: Column(
                     children: [
                       Center(
-                        child: Switch(
-                          value: themeProvider.isLightTheme,
-                          onChanged: (val) {
-                            themeProvider.setThemeData = val;
-                          },
-                        ),
+                          child: AnimatedBuilder(
+                        animation: _animation,
+                        builder: (context, child) {
+                          String textR = "R";
+                          String text = "Retrospective".substring(1,_animation.value);
+                          return Row(
+                            children: [
+                              Text(
+                                textR,
+                                style: TextStyle(fontSize: 100),
+                              ),
+                              Text(
+                                  text,
+                                style: TextStyle(fontSize: 40),
+                              ),
+                            ],
+                          );
+                        },
+                      )),
+                      SizedBox(
+                        height: 48,
+                        width: double.infinity,
+                        child: Text(
+                            RetrospectiveLocalization.of(context).retrospectiveExp,
+                            style: TextStyle(fontSize: 16)),
                       ),
                       SizedBox(
                         height: 60,
                         width: double.infinity,
                         child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0))),
                           onPressed: () {
                             Navigator.pushNamed(context, "/choose_template");
                           },
@@ -88,6 +115,9 @@ class _StartPageState extends State<StartPage> {
                         height: 60,
                         width: double.infinity,
                         child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0))),
                           onPressed: isEnabled
                               ? () {
                                   Navigator.pushNamed(context, "/retro",
@@ -111,6 +141,9 @@ class _StartPageState extends State<StartPage> {
                         height: 60,
                         width: double.infinity,
                         child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0))),
                           onPressed: () {
                             Navigator.pushNamed(context, "/saved_history");
                           },
@@ -119,6 +152,18 @@ class _StartPageState extends State<StartPage> {
                             style: Theme.of(context).textTheme.headline6,
                           ),
                         ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.wb_sunny),
+                          Switch(
+                            value: themeProvider.isLightTheme,
+                            onChanged: (val) {
+                              themeProvider.setThemeData = val;
+                            },
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -133,14 +178,18 @@ class _StartPageState extends State<StartPage> {
   void dispose() {
     // Clean up the controller when the widget is removed from the
     // widget tree.
-    _textEditingController.dispose();
     super.dispose();
+    _textEditingController.dispose();
+    _controller.dispose();
   }
 
   @override
   void initState() {
     super.initState();
-
+    _controller =
+        AnimationController(duration: const Duration(seconds: 1), vsync: this);
+    _animation = IntTween(begin: 1, end: 13).animate(_controller);
+    _controller.forward();
     _textEditingController.addListener(_checkButtonEnable);
   }
 
@@ -176,6 +225,8 @@ class _StartPageState extends State<StartPage> {
       return LeanCoffee();
     else if (firstNumber == 8)
       return WrapTechnique();
+    else if (firstNumber == 9)
+      return FreeFormat();
     else
       return MadGladSad();
   }

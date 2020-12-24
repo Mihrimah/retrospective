@@ -8,6 +8,7 @@ import 'package:retrospective/pages/waiting_content_page.dart';
 import 'package:retrospective/repository/local_repository.dart';
 import 'package:retrospective/template/abstract_base_template.dart';
 import 'package:retrospective/template/fourls.dart';
+import 'package:retrospective/template/freeformat.dart';
 import 'package:retrospective/template/lean_coffee.dart';
 import 'package:retrospective/template/mad_glad_sad.dart';
 import 'package:retrospective/template/sailorboat.dart';
@@ -114,6 +115,8 @@ class _SavedHistoryPageState extends State<SavedHistoryListPage> {
       return LeanCoffee();
     else if (firstNumber == 8)
       return WrapTechnique();
+    else if (firstNumber == 9)
+      return FreeFormat();
     else
       return MadGladSad();
   }

@@ -3,10 +3,13 @@ import 'package:retrospective/core/grid_block.dart';
 import 'package:retrospective/localization/retrospective_localization.dart';
 import 'package:retrospective/template/abstract_base_template.dart';
 
-class Sailorboat extends AbstractBaseTemplate {
-  static final String templateName = "Sailor Boat";
-  static final List<String> templateTitles = ["ANCHOR", "WIND"];
-  static final int templateType = 3;
+class FreeFormat extends AbstractBaseTemplate {
+  static final String templateName = "Free Format";
+  static final List<String> templateTitles = ["COMMENT"];
+  static final int templateType = 9;
+
+  FreeFormat()
+      : super(name: templateName, titles: templateTitles, type: templateType);
 
   @override
   Widget getTemplateWidget(BuildContext context) {
@@ -14,10 +17,8 @@ class Sailorboat extends AbstractBaseTemplate {
       title: templateName,
       description: templateTitles,
       infoTitle: templateName,
-      infoMessage: RetrospectiveLocalization.of(context).sailorboatInfo,
+      infoMessage: RetrospectiveLocalization.of(context).freeformatInfo,
     );
   }
 
-  Sailorboat()
-      : super(name: templateName, titles: templateTitles, type: templateType);
 }
