@@ -23,6 +23,7 @@ class App extends StatelessWidget {
     final themeProvider = Provider.of<ThemeProvider>(context);
     return MaterialApp(
       initialRoute: '/start',
+      debugShowCheckedModeBanner: false,
       routes: routes,
       theme: themeProvider.getThemeData,
       home: StartPage(),

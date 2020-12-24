@@ -3,6 +3,7 @@ import 'package:retrospective/localization/retrospective_localization.dart';
 import 'package:retrospective/model/retro_page_params.dart';
 import 'package:retrospective/template/abstract_base_template.dart';
 import 'package:retrospective/template/fourls.dart';
+import 'package:retrospective/template/freeformat.dart';
 import 'package:retrospective/template/lean_coffee.dart';
 import 'package:retrospective/template/mad_glad_sad.dart';
 import 'package:retrospective/template/sailorboat.dart';
@@ -63,7 +64,7 @@ class _StartPageState extends State<StartPage>
                         },
                       )),
                       SizedBox(
-                        height: 42,
+                        height: 48,
                         width: double.infinity,
                         child: Text(
                             RetrospectiveLocalization.of(context).retrospectiveExp,
@@ -224,6 +225,8 @@ class _StartPageState extends State<StartPage>
       return LeanCoffee();
     else if (firstNumber == 8)
       return WrapTechnique();
+    else if (firstNumber == 9)
+      return FreeFormat();
     else
       return MadGladSad();
   }
