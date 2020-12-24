@@ -40,7 +40,8 @@ class RetrospectiveLocalization{
       'madsadgladInfo' : 'Esta plantilla retrospectiva es una excelente manera de verificar el pulso emocional de su equipo ágil.',
       'whatwentwellInfo' : '¿Qué salió bien? ¿Qué no salió bien? es una técnica retrospectiva básica que se enfoca en las fortalezas y debilidades de su equipo.',
       'startstopcontinueInfo' : 'Si desea comentarios orientados a la acción, este es un gran formato para su equipo ágil.',
-      'freeformatInfo' : 'Los miembros del equipo pueden dar comentarios de sentimientos emocionales completos en formato libre.'
+      'freeformatInfo' : 'Los miembros del equipo pueden dar comentarios de sentimientos emocionales completos en formato libre.',
+      'noListFound' : 'No se puede enviar correo en blanco.'
     },
     'de': {
       'title': 'Titel',
@@ -72,7 +73,8 @@ class RetrospectiveLocalization{
       'madsadgladInfo' : 'Diese retrospektive Vorlage ist eine großartige Möglichkeit, den emotionalen Puls Ihres agilen Teams zu überprüfen.',
       'whatwentwellInfo' : 'Was ging gut? Was ist nicht gut gelaufen? ist eine grundlegende retrospektive Technik, die sich auf die Stärken und Schwächen Ihres Teams konzentriert.',
       'startstopcontinueInfo' : 'Wenn Sie handlungsorientiertes Feedback wünschen, ist dies ein großartiges Format für Ihr agiles Team.',
-      'freeformatInfo' : 'Mitglieder des Teams können ganze emotionale Gefühle in freiem Format kommentieren.'
+      'freeformatInfo' : 'Mitglieder des Teams können ganze emotionale Gefühle in freiem Format kommentieren.',
+      'noListFound' : 'Leere Mail kann nicht gesendet werden.'
         },
     'it': {
       'title': 'Ciao Mondo',
@@ -104,7 +106,8 @@ class RetrospectiveLocalization{
       'madsadgladInfo': 'Questo modello retrospettivo è un ottimo modo per controllare il polso emotivo del tuo team agile.',
       'whatwentwellInfo': 'Cosa è andato bene? Cosa non è andato bene? è una tecnica retrospettiva di base che si concentra sui punti di forza e di debolezza del tuo team.',
       'startstopcontinueInfo': 'Se desideri un feedback orientato all\'azione, questo è un ottimo formato per il tuo team agile.',
-      'freeformatInfo': 'I membri del team possono fornire commenti sui sentimenti emotivi in formato libero.'
+      'freeformatInfo': 'I membri del team possono fornire commenti sui sentimenti emotivi in formato libero.',
+      'noListFound' : 'Non è possibile inviare posta vuota.'
     },
     'fr': {
       'title': 'Bonjour le monde',
@@ -136,7 +139,8 @@ class RetrospectiveLocalization{
       'madsadgladInfo' : 'Ce modèle rétrospectif est un excellent moyen de vérifier le pouls émotionnel de votre équipe agile.',
       'whatwentwellInfo' : 'Qu\'est-ce qui s\'est bien passé? Qu\'est-ce qui ne s\'est pas bien passé? est une technique rétrospective de base qui met l\'accent sur les forces et les faiblesses de votre équipe.',
       'startstopcontinueInfo' : 'Si vous voulez des commentaires orientés vers l\'action, c\'est un excellent format pour votre équipe agile.',
-      'freeformatInfo' : 'Les membres de l\'équipe peuvent faire part de leurs sentiments émotionnels en format libre.'
+      'freeformatInfo' : 'Les membres de l\'équipe peuvent faire part de leurs sentiments émotionnels en format libre.',
+      'noListFound' : 'Les e-mails vierges ne peuvent pas être envoyés.'
     },
     'en': {
       'title': 'Hello World',
@@ -168,7 +172,8 @@ class RetrospectiveLocalization{
       'madsadgladInfo' : 'This retrospective template is a great way to check the emotional pulse of your agile team.',
       'whatwentwellInfo' : 'What Went Well? What Didn\'t Go Well? is a basic retrospective technique that focuses on your team\'s strengths and weaknesses.',
       'startstopcontinueInfo' : 'If you want action-oriented feedback, then this is a great format for your agile team.',
-      'freeformatInfo' : 'Members of team can give comments whole emotional feelings in free format.'
+      'freeformatInfo' : 'Members of team can give comments whole emotional feelings in free format.',
+      'noListFound' : 'Mail has not been sent due to no list item'
     },
     'tr': {
       'title': 'Başlık',
@@ -200,11 +205,15 @@ class RetrospectiveLocalization{
       'madsadgladInfo' : 'Takım üyelerinin duygusal olarak sprintten kızgın, üzgün, memnun oldukları konuları paylaşmalarını sağlar.',
       'whatwentwellInfo' : 'Takım içinde neyin iyi yapıldığını nelerin iyi yapılmadığını belirlemek için kullanılır.',
       'startstopcontinueInfo' : 'Aksiyon almak için uygulanan template tipidir, başlama, bitirme ve devam etme aksiyonlarını almayı sağlar.',
-      'freeformatInfo' : 'Takım üyeleri bu template formatında diledikleri yorumları girebilir.'
+      'freeformatInfo' : 'Takım üyeleri bu template formatında diledikleri yorumları girebilir.',
+      'noListFound' : 'Boş mail gönderilemez.'
 },
   };
   String get send {
     return _localizedValues[locale.languageCode]['send'];
+  }
+  String get noListFound {
+    return _localizedValues[locale.languageCode]['noListFound'];
   }
   String get sendMail {
     return _localizedValues[locale.languageCode]['sendMail'];

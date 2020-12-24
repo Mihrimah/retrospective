@@ -51,7 +51,8 @@ class _RetroPageState extends State<RetroPage> with WidgetsBindingObserver {
         .then((value) => savedRecordlen = value);
     print("init state retro page");
     _firebaseRepository.increaseActiveMember(widget.retroPageParams.roomCode);
-    _firebaseRepository.findRoomsDetail(widget.retroPageParams.roomCode)
+    _firebaseRepository
+        .findRoomsDetail(widget.retroPageParams.roomCode)
         .listen((event) {
       setState(() {
         activeMember = event.data()["activeMember"];
@@ -68,18 +69,17 @@ class _RetroPageState extends State<RetroPage> with WidgetsBindingObserver {
     print("dispose ran retro page");
   }
 
-
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
     print("state : " + state.toString());
-    if((state == AppLifecycleState.inactive ||
-       state == AppLifecycleState.detached ||
-       state == AppLifecycleState.paused) && oldState == AppLifecycleState.resumed){
+    if ((state == AppLifecycleState.inactive ||
+            state == AppLifecycleState.detached ||
+            state == AppLifecycleState.paused) &&
+        oldState == AppLifecycleState.resumed) {
       _firebaseRepository.decreaseActiveMember(widget.retroPageParams.roomCode);
       print("didChangeAppLifecycleState ran retro page");
-    }
-    else if(state == AppLifecycleState.resumed){
+    } else if (state == AppLifecycleState.resumed) {
       _firebaseRepository.increaseActiveMember(widget.retroPageParams.roomCode);
     }
     oldState = state;
@@ -96,8 +96,10 @@ class _RetroPageState extends State<RetroPage> with WidgetsBindingObserver {
                 widget.retroPageParams.template.getTemplateName(),
                 style: TextStyle(fontSize: 20),
               ),
-              flexibleSpace:
-                  appBarTitle(RetrospectiveLocalization.of(context).shareCode,activeMember, context),
+              flexibleSpace: appBarTitle(
+                  RetrospectiveLocalization.of(context).shareCode,
+                  activeMember,
+                  context),
               actions: [
                 IconButton(
                   icon: Icon(
@@ -110,13 +112,15 @@ class _RetroPageState extends State<RetroPage> with WidgetsBindingObserver {
                       builder: (BuildContext ctx) {
                         // return object of type Dialog
                         return AlertDialog(
-                          title: new Text(RetrospectiveLocalization.of(context).sendMail),
+                          title: new Text(
+                              RetrospectiveLocalization.of(context).sendMail),
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(20.0))
-                          ),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20.0))),
                           content: TextFormField(
                             decoration: InputDecoration(
-                              hintText: RetrospectiveLocalization.of(context).emailAddress,
+                              hintText: RetrospectiveLocalization.of(context)
+                                  .emailAddress,
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Theme.of(context).accentColor),
@@ -131,14 +135,18 @@ class _RetroPageState extends State<RetroPage> with WidgetsBindingObserver {
                           actions: <Widget>[
                             // usually buttons at the bottom of the dialog
                             new FlatButton(
-                              child: new Text(RetrospectiveLocalization.of(context).send,
-                                  style: Theme.of(context).textTheme.headline6),
-                              onPressed: (){
-                                if(_textEditingController.value.text != null && _textEditingController.value.text !='')
-                                      sendMail(context, _textEditingController.value.text);
-                                      Navigator.of(context).pop();
-                                    }
-                            ),
+                                child: new Text(
+                                    RetrospectiveLocalization.of(context).send,
+                                    style:
+                                        Theme.of(context).textTheme.headline6),
+                                onPressed: () {
+                                  if (_textEditingController.value.text !=
+                                          null &&
+                                      _textEditingController.value.text != '')
+                                    sendMail(context,
+                                        _textEditingController.value.text);
+                                  Navigator.of(context).pop();
+                                }),
                           ],
                         );
                       },
@@ -212,14 +220,23 @@ class _RetroPageState extends State<RetroPage> with WidgetsBindingObserver {
   sendMail(BuildContext context, String toAddress) async {
     Mail.Mailer m = Mail.Mailer(list: list, toAddress: toAddress);
     try {
+      if (list == null || list.isEmpty) throw new NoListFoundException();
+
       await m.sendMail();
       Scaffold.of(context).showSnackBar(SnackBar(
-        content: Text(RetrospectiveLocalization.of(context).successEmailRequest),
+        content:
+            Text(RetrospectiveLocalization.of(context).successEmailRequest),
+        duration: Duration(seconds: 2),
+      ));
+    } on NoListFoundException {
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text(RetrospectiveLocalization.of(context).noListFound),
         duration: Duration(seconds: 2),
       ));
     } catch (e) {
       Scaffold.of(context).showSnackBar(SnackBar(
-        content: Text(RetrospectiveLocalization.of(context).failEmailRequest + e.toString()),
+        content: Text(RetrospectiveLocalization.of(context).failEmailRequest +
+            e.toString()),
         duration: Duration(seconds: 2),
       ));
     }
@@ -316,7 +333,7 @@ class _RetroPageState extends State<RetroPage> with WidgetsBindingObserver {
       );
   }
 
-  Widget appBarTitle(String code,int activeMember, BuildContext context) {
+  Widget appBarTitle(String code, int activeMember, BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
@@ -328,9 +345,11 @@ class _RetroPageState extends State<RetroPage> with WidgetsBindingObserver {
               size: 20,
             ),
             Padding(
-              padding: const EdgeInsets.only(right:15.0),
-              child: Text(activeMember.toString(),style: TextStyle(fontWeight: FontWeight.bold),)
-            ),
+                padding: const EdgeInsets.only(right: 15.0),
+                child: Text(
+                  activeMember.toString(),
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                )),
             Text(
               code,
               style: TextStyle(fontSize: 20),
@@ -361,3 +380,5 @@ class _RetroPageState extends State<RetroPage> with WidgetsBindingObserver {
     );
   }
 }
+
+class NoListFoundException implements Exception {}
