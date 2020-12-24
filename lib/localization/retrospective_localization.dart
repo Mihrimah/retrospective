@@ -108,10 +108,10 @@ class RetrospectiveLocalization{
     },
     'fr': {
       'title': 'Bonjour le monde',
-      'roomCode' : 'Code de la chambre',
-      'createRoom' : 'Créer une chambre',
+      'roomCode' : 'Code de la Atelier',
+      'createRoom' : 'Créer une Atelier',
       'retrospectiveExp' : 'Des rétrospectives engageantes qui alimentent l\'amélioration continue',
-      'joinRoom' : 'Rejoindre la chambre',
+      'joinRoom' : 'Rejoindre la Atelier',
       'theme' : 'Thème',
       'addContent' : 'Ajouter du contenu',
       'add' : 'Ajouter',
