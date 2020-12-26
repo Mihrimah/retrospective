@@ -11,7 +11,7 @@ class LeanCoffee extends AbstractBaseTemplate {
   static final String backgroundI = "assets/images/madsadglad.png";
 
   LeanCoffee()
-      : super(name: templateName, titles: templateTitles, type: templateType, backgroundColor: backgroundC, backgroundImage: backgroundI);
+      : super(name: templateName, titles: templateTitles, type: templateType);
 
   @override
   Widget getTemplateWidget(BuildContext context) {
@@ -22,5 +22,4 @@ class LeanCoffee extends AbstractBaseTemplate {
       infoMessage: RetrospectiveLocalization.of(context).leancoffeeInfo,
     );
   }
-
 }

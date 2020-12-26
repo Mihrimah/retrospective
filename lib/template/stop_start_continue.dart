@@ -11,7 +11,7 @@ class StopStartContinue extends AbstractBaseTemplate {
   static final String backgroundI = "assets/images/madsadglad.png";
 
   StopStartContinue()
-      : super(name: templateName, titles: templateTitles, type: templateType, backgroundColor: backgroundC, backgroundImage: backgroundI);
+      : super(name: templateName, titles: templateTitles, type: templateType);
 
   @override
   Widget getTemplateWidget(BuildContext context) {

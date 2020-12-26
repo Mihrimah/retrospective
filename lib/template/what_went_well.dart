@@ -12,7 +12,7 @@ class WhatWentWell extends AbstractBaseTemplate {
 
 
   WhatWentWell()
-      : super(name: templateName, titles: templateTitles, type: templateType, backgroundColor: backgroundC, backgroundImage: backgroundI);
+      : super(name: templateName, titles: templateTitles, type: templateType);
 
   @override
   Widget getTemplateWidget(BuildContext context) {
