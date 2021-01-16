@@ -203,8 +203,9 @@ class _RetroPageState extends State<RetroPage> with WidgetsBindingObserver {
                   if (snapshot.data.documents.length == 0)
                     return WaitingContentPage();
                   list = RetroDataModel.toBuilder(snapshot);
-                  return GroupedListView(
+                  return GroupedListView<RetroDataModel,String>(
                     groupBy: (RetroDataModel t) => t.templateTitle,
+                    sortBy: (RetroDataModel t,RetroDataModel t1) => t1.likeCount.compareTo(t.likeCount),
                     groupBuilder: (BuildContext context, String title) =>
                         _listGroupedHeaderWidget(title),
                     listBuilder: (BuildContext context, RetroDataModel t) =>
@@ -267,6 +268,7 @@ class _RetroPageState extends State<RetroPage> with WidgetsBindingObserver {
   }
 
   Widget _listRowWidget(RetroDataModel retroDataModel) {
+    print("****** + render " + retroDataModel.textContent);
     return ListTile(
       title: Text(
         retroDataModel.textContent,

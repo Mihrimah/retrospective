@@ -43,7 +43,7 @@ class Mailer {
       Header header = Header(key);
       List<Row> rowList = List();
       value.forEach((element) {
-        rowList.add(Row(text: element.textContent));
+        rowList.add(Row(text: element.textContent, likeCount: element.likeCount));
       });
       Block block = Block(header: header, rows: rowList);
       table.addBlock(block);
@@ -116,13 +116,14 @@ class Block {
 }
 
 class Row {
-  Row({this.text});
+  Row({this.text, this.likeCount});
 
   final String text;
+  final int likeCount;
 
   generateRowHtml() {
     StringBuffer html = StringBuffer();
-    html.write("<p> $text </p>");
+    html.write("<p> $text &nbsp;&nbsp;&nbsp; [$likeCount people liked]</p>");
     return html;
   }
 }

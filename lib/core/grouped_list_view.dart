@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 typedef G GroupFunction<T, G>(T element);
+typedef int SortFunction<T>(T element, T element2);
 typedef Widget ListBuilderFunction<T>(BuildContext context, T element);
 typedef Widget GroupBuilderFunction<G>(BuildContext context, G group);
 
@@ -11,12 +12,14 @@ class GroupedListView<T, G> extends StatelessWidget {
   GroupedListView(
       {@required this.list,
       @required this.groupBy,
+      @required this.sortBy,
       this.listBuilder,
       this.groupBuilder}) {
     _list = viewListBuilder(list);
   }
 
   final GroupFunction<T, G> groupBy;
+  final SortFunction<T> sortBy;
   final ListBuilderFunction<T> listBuilder;
   final GroupBuilderFunction<G> groupBuilder;
   final List<T> list;
@@ -29,7 +32,9 @@ class GroupedListView<T, G> extends StatelessWidget {
     for (T element in collection) {
       var key = groupBy(element);
       if (groupedMap.containsKey(key)) {
-        List copyList = new List<T>.from(groupedMap[key])..add(element);
+        List copyList = new List<T>.from(groupedMap[key])
+          ..add(element)
+          ..sort(sortBy);
         groupedMap[key] = copyList;
       } else {
         groupedMap.putIfAbsent(key, () => [element]);
