@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:retrospective/core/animated_heart.dart';
 import 'package:retrospective/core/grouped_list_view.dart';
 import 'package:retrospective/localization/retrospective_localization.dart';
 import 'package:retrospective/model/retro_data_model.dart';
@@ -283,20 +284,14 @@ class _RetroPageState extends State<RetroPage> with WidgetsBindingObserver {
           retroDataModel.likeCount.toString(),
           style: TextStyle(fontSize: 15),
         ),
-        //Text(givenLikeCount.toString()),
-        IconButton(
-          icon: favouriteIcon(retroDataModel),
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-          onPressed: () {
-            favouriteIconOnPress(retroDataModel);
-          },
+        AnimatedHeart(
+          retroDataModel: retroDataModel,
         ),
       ],
     );
   }
 
-  favouriteIconOnPress(RetroDataModel retroDataModel) {
+  /*favouriteIconOnPress(RetroDataModel retroDataModel) {
     if (likedRowsSet.contains(retroDataModel.document.id)) {
       FirebaseFirestore.instance.runTransaction((transaction) async {
         DocumentSnapshot freshSnap =
@@ -322,16 +317,7 @@ class _RetroPageState extends State<RetroPage> with WidgetsBindingObserver {
         givenLikeCount = givenLikeCount + 1;
       });
     }
-  }
-
-  Widget favouriteIcon(RetroDataModel retroDataModel) {
-    if (likedRowsSet.contains(retroDataModel.document.id))
-      return Icon(Icons.favorite, color: Colors.red);
-    else
-      return Icon(
-        Icons.favorite,
-      );
-  }
+  }*/
 
   Widget appBarTitle(String code, int activeMember, BuildContext context) {
     return Column(
